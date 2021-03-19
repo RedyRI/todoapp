@@ -1,9 +1,46 @@
+@import './fonts.less';
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-h1 {
-    text-transform: uppercase;
+
+.header {
+    display: flex;
+    border: solid red 1px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 85px;
+    &__logo {
+        flex: 1;
+        border-right: 3px dashed red;
+        display: flex;
+        justify-content: center;
+        h1 {
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+        }
+    }
+    &__nav {
+        padding-left: 45px;
+        ul {
+            list-style: none;
+            display: flex;
+            li {
+                padding: 0px 5px;
+                a {
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    font-family: 'Montserrat', sans-serif;
+                    padding: 5px 10px;
+                    &:hover {
+                        color: white;
+                        background-color: black;
+                    }
+                }
+            }
+        }
+    }
 }
