@@ -1,0 +1,26 @@
+doctype html 
+html 
+    head 
+        title Todo-app
+    body 
+        .header 
+            .header__logo 
+                .logo-container 
+                    h1 ToDoApp 
+            .header__options 
+                label(for='mode') Show as:  
+                select(name='mode' id='mode' class='mode')
+                    option(value='1') Cards
+                    option(value="2") table
+            .header__nav 
+                .add
+                    .wave
+                    .image
+        .content
+            .content__side 
+                .arrow >> 
+            .content__tasks
+        .footer 
+            .logo 
+                h1 ToDoApp
+            p all rights reserved

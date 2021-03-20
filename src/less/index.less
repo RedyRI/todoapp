@@ -1,4 +1,5 @@
 @import './fonts.less';
+@import './content.less';
 * {
     margin: 0;
     padding: 0;
@@ -8,16 +9,27 @@
         background-color: white;
         display: flex;
         align-items: center;
-        height: 100px;
-        max-width: 1200px;
+        max-height: 10vh;
+        overflow: hidden;
+        // max-width: 1200px;
         margin: 0 auto;
         padding: 5px 0;
+        border-bottom: 1px solid black;
+        &__options {
+            padding: 3px 5px;
+            height: 100%;
+            border-right: 3px dashed crimson;
+            select {
+                display: block;
+            }
+        }
         &__logo {
             flex: 1;
             border-right: 3px dashed crimson;
             padding-left: 25px;
             h1 {
                 font-family: 'Poppins', sans-serif;
+                font-weight: 200;
             }
         }
         &__nav {
@@ -25,33 +37,45 @@
             .add{
                 width: 50px;
                 height: 50px;
-                display: flex;
-                align-items: center;
-                border: solid 4px lightgray;
-                justify-content: center;
-                border-radius: 50%;
                 position: relative;
-                img {
-                    width: 45px;
-                    height: 45px;
+                .wave {
+                    width: 50px;
+                    height: 50px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: 50%;
+                    animation: waves 1s ease infinite;
                 }
-                animation: waves 1s ease infinite;
+
+                .image {
+                    width: 50px;
+                    height: 50px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: 50%;
+                    background-image: url("../static/button.png");
+                    background-position: center;
+                    background-size: cover;
+                    &:hover {
+                        transform: scale(0.9);
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }
     
-.content {
-    width: 100%;
-    height: 100vh;
-    background-color: lightblue;
-}
 
 .footer {
+    max-height: 10vh;
+    overflow: hidden;
     .logo {
         h1 {
             font-family: 'Poppins';
             float: right;
-        }
+        }   
     }
     p {
         clear: both;
@@ -63,17 +87,19 @@
 
 @keyframes waves {
     0% {
-        border: solid 4px rgb(245, 0, 0);
+        border: solid 3px rgba(173, 216, 230, 0.952);
+        transform: scale(1.1);
+    }
+    25% {
+        border: solid 3px rgba(173, 216, 230, 0.7);
+        transform: scale(1.2);
     }
     50% {
-
-        border: solid 4px rgb(133, 119, 119);
-        width: 55px;
-        height: 55px;
+        border: solid 2px rgba(173, 216, 230, 0.4);
+        transform: scale(1.3);
     }
     100% {
-        border: solid 4px rgb(23, 211, 38);
-        width: 60px;
-        height: 60px;
+        border: solid 2px rgba(173, 216, 230, 0.005);
+        transform: scale(1.35);
     }
 }
