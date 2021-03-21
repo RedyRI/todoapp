@@ -37,6 +37,9 @@ function createCard() {
     const expandBtn = document.createElement('button')
     expandBtn.classList.add('expand-btn')
     expandBtn.textContent = 'expand';
+
+    const editBtn = document.createElement('span')
+    editBtn.classList.add('edit-btn')
     
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete-btn')
@@ -51,12 +54,13 @@ function createCard() {
     card.appendChild(descriptionContainer);
     card.appendChild(cardStatus);
     card.appendChild(expandBtn);
+    card.appendChild(editBtn);
     card.appendChild(deleteBtn);
     
     return card
 }
 
-function fillCard(card, task) {
+function fillCard(card, task, type) {
 
     card.setAttribute('data-id', task.id)
     card.querySelector('.title').textContent = task.title
@@ -64,7 +68,13 @@ function fillCard(card, task) {
     card.querySelector('.category').textContent = task.category
     card.querySelector('.description').textContent = task.description
     card.querySelector('.date').textContent = task.date
-
+    if (type == 'edit') {
+        console.log('add an edited mark');
+        let edited = document.createElement('span')
+        edited.classList.add('edited-warning')
+        edited.textContent = '<edited>'
+        card.appendChild(edited)
+    }
 }
 
 export {
