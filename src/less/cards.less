@@ -1,9 +1,11 @@
 .content__tasks {
     display: flex;
-    align-items: flex-start;
     flex-wrap: wrap;
+    z-index: 4;
+    flex: 1;
+    align-items: flex-start;
     overflow-y: auto;
-    overflow-x: hidden;
+    background-color: lightgray;
     .card {
         background-color: white;
         color: black;
@@ -14,7 +16,7 @@
         position: relative;
         flex-direction: column;
         box-shadow: 0 0 5px black;
-        height: 35vh;
+        height: 250px;
         &:hover {
             box-shadow: 0 0 8px  black;
         }

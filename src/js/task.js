@@ -10,6 +10,7 @@ class Task {
         this.priority = priority;
         this.done = false;
         this.date = format(new Date(), 'yyy/dd/MM HH:mm'); 
+        this. edit = false;
     }
 
     set _title(value) {

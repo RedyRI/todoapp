@@ -27,6 +27,7 @@ const menuContainer =  content.querySelector('.content__side');
 const arrow = menuContainer.querySelector('.arrow')
 const tasksContainer =  content.querySelector('.content__tasks')
 const formBtn = addFormContainer.querySelector('#n')
+const saveChangsBtn = editFormContainer.querySelector('#e');
 const cancelForm = addFormContainer.querySelector('.cancel')
 const cancelEditForm = editFormContainer.querySelector('.cancel')
 
@@ -47,6 +48,7 @@ formBtn.addEventListener('click', addTask);
 cancelForm.addEventListener('click',hide);
 arrow.addEventListener('click', showMenu);
 tasksContainer.addEventListener('click', deleteOrUpdateCard);
+saveChangsBtn.addEventListener('click', edit)
 
 // render the initial content
 menuContainer.appendChild(sideMenu)
@@ -64,11 +66,16 @@ function hide(e) {
         addFormContainer.style.display = 'none'
         editFormContainer.style.display = 'none'
         arrow.style.pointerEvents = 'all';
+        cancelEdit();
     }
 }
 
 function showForm(e) {
     addFormContainer.style.display = 'flex';
+    checkSideMenu();
+}
+
+function checkSideMenu() {
     arrow.style.pointerEvents = 'none';
     if(arrow.classList.contains('rotate')) {
         arrow.classList.toggle('rotate')
@@ -80,42 +87,10 @@ function addTask(e) {
     e.preventDefault();
     let t = getTask(e);
     if(t != undefined) {
-        console.log(t);
         addFormContainer.style.display = 'none';
         tasks.push(t)
         render(t)
     }
-    // let allOk = true; 
-    // let task = {}
-    // let items = e.target.parentNode.children;
-    // for (let i = 0; i < items.length; i++) {
-    //     if(items[i].classList.contains('info')) {
-    //         let id = items[i].getAttribute('id'); 
-    //         if(items[i].value == '') {
-    //             alert(`${id} missing`);
-    //             allOk = false; 
-    //             break;
-    //         } else {
-    //             task[id] = items[i].value;
-    //             if(id == 'newtitle' || id == 'newdescription') {
-    //                 items[i].value = ''
-    //             }
-    //         }
-    //     }
-    // }
-
-    // if(allOk) {
-    //     console.log(task);
-    //     let t = new Task(task.newtitle, task.newpriority, task.newdescription, task.newcategory);
-    //     tasks.push(t)
-    //     addFormContainer.style.display = 'none';
-    //     console.log(tasks);
-    //     render(t)
-    //     arrow.style.pointerEvents = 'all';
-    // } else {
-    //     let val = task.title == undefined ? '': task.title; 
-    //     items[1].value = val;
-    // }
 }
 
 function render(t) {
@@ -133,65 +108,76 @@ function deleteOrUpdateCard(e) {
     if(e.target.classList.contains('delete-btn')) {
         deleteCard(e)
     } else if (e.target.classList.contains('s')){
+        console.log(tasks);
         updateState(e)
     } else if (e.target.classList.contains('edit-btn')) {
         let dataId = e.target.parentNode.getAttribute('data-id');
-        let cardToEdit = e.target.parentNode;
-        console.log('you need to edit the card');
-        console.log(dataId);
         let t = tasks.findIndex(task => task.id == dataId)
-        console.log(t); 
-        showEditForm(cardToEdit, t)
+        tasks[t].edit = true; 
+        showEditForm();
     }
+}
+
+function cancelEdit() {
+    tasks.forEach(item => {item.edit = false})
 }
 
 function deleteCard(e) {
     tasks.splice(tasks.findIndex(item => item.id == e.target.parentNode.getAttribute('data-id')),1)
     tasksContainer.removeChild(e.target.parentNode)
-    console.log(tasks);
 }
 
 function updateState(e) {
+    let cardId = e.target.parentNode.parentNode.parentNode.getAttribute('data-id')
+    // console.log(cardId);
+    let task = tasks.find(item => item.id == cardId)
+    // console.log(task);
     if(e.target.parentNode.lastElementChild.textContent=='pending') {
         e.target.parentNode.lastElementChild.textContent = 'done';
         e.target.parentNode.firstElementChild.style.backgroundColor = 'rgb(0, 255, 0)'
+        task.done = true;
     } else {
         e.target.parentNode.lastElementChild.textContent = 'pending';
         e.target.parentNode.firstElementChild.style.backgroundColor = 'rgb(196, 32, 32)'
+        task.done = false;
+    }
+    console.log(tasks);
+}
+
+function edit(e) {
+    e.preventDefault();
+    let editedTask = getTask(e);
+    if (editedTask != undefined) {
+        editTask(editedTask);
     }
 }
 
-function showEditForm(cardToEdit, t) {
+function showEditForm() {
+    let t = tasks.find(item => item.edit == true)
+    checkSideMenu()
     // addFormContainer.querySelector.
-    console.log(cardToEdit, t);
-    let saveChangsBtn = editFormContainer.querySelector('#e');
-    editFormContainer.querySelector('#etitle').value = tasks[t].title
-    editFormContainer.querySelector('#epriority').value = tasks[t].priority
-    editFormContainer.querySelector('#ecategory').value = tasks[t].category
-    editFormContainer.querySelector('#edescription').value = tasks[t].description
+    editFormContainer.querySelector('#etitle').value = t.title
+    editFormContainer.querySelector('#epriority').value = t.priority
+    editFormContainer.querySelector('#ecategory').value = t.category
+    editFormContainer.querySelector('#edescription').value = t.description
     editFormContainer.style.display = 'flex';
-    saveChangsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        let editedTask = getTask(e);
-        if (editedTask != undefined) {
-            console.log(editedTask);
-            editTask(cardToEdit, t, editedTask);
-        }
-    })
 }
 
-function editTask(cardToEdit, t, editedTask) {
-    console.log('need to edit task');
+function editTask(editedTask) {
+    let t = tasks.find(item => item.edit == true)
+    let cards = [...tasksContainer.querySelectorAll('.card')];
+    let cardToEdit = cards.find(item => item.getAttribute('data-id') == t.id)
     editFormContainer.style.display = 'none';
-    console.log(editedTask);
-    console.log(tasks[t]);
     for (let k in editedTask) {
         if(k != 'id') {
-            tasks[t][k] = editedTask[k];
+            if(k != 'edit') {
+                t[k] = editedTask[k];
+            } else {
+                t[k] = false;
+            }
         }
     }
-    console.log(tasks[t]);
-    fillCard(cardToEdit, tasks[t], 'edit')
+    fillCard(cardToEdit, t, 'edit')
 }
 
 
@@ -201,7 +187,6 @@ function getTask(e) {
     let items = e.target.parentNode.children;
     for (let i = 0; i < items.length; i++) {
         if(items[i].classList.contains('info')) {
-            console.log(items[i]);
             let id = items[i].getAttribute('id').slice(1,); 
             if(items[i].value == '') {
                 alert(`${id} missing`);
@@ -225,3 +210,5 @@ function getTask(e) {
         items[1].value = val;
     }
 }
+
+console.log(tasks);
