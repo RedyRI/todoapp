@@ -55,7 +55,6 @@ tasksContainer.appendChild(editFormContainer)
 
 // functions 
 function showMenu(e) {
-    console.log(e);
     e.target.classList.toggle('rotate')
     e.target.parentNode.classList.toggle('show')
 }
@@ -126,13 +125,11 @@ function render(t) {
 
 function renderAsCards(t) {
     let c = createCard();
-    console.log(c);
     fillCard(c, t, 'new')
     tasksContainer.appendChild(c)
 }
 
 function deleteOrUpdateCard(e) {
-    console.log(e.target);
     if(e.target.classList.contains('delete-btn')) {
         deleteCard(e)
     } else if (e.target.classList.contains('s')){
@@ -143,7 +140,7 @@ function deleteOrUpdateCard(e) {
         console.log('you need to edit the card');
         console.log(dataId);
         let t = tasks.findIndex(task => task.id == dataId)
-        console.log(t);
+        console.log(t); 
         showEditForm(cardToEdit, t)
     }
 }
@@ -166,6 +163,7 @@ function updateState(e) {
 
 function showEditForm(cardToEdit, t) {
     // addFormContainer.querySelector.
+    console.log(cardToEdit, t);
     let saveChangsBtn = editFormContainer.querySelector('#e');
     editFormContainer.querySelector('#etitle').value = tasks[t].title
     editFormContainer.querySelector('#epriority').value = tasks[t].priority
@@ -176,6 +174,7 @@ function showEditForm(cardToEdit, t) {
         e.preventDefault();
         let editedTask = getTask(e);
         if (editedTask != undefined) {
+            console.log(editedTask);
             editTask(cardToEdit, t, editedTask);
         }
     })
@@ -202,6 +201,7 @@ function getTask(e) {
     let items = e.target.parentNode.children;
     for (let i = 0; i < items.length; i++) {
         if(items[i].classList.contains('info')) {
+            console.log(items[i]);
             let id = items[i].getAttribute('id').slice(1,); 
             if(items[i].value == '') {
                 alert(`${id} missing`);

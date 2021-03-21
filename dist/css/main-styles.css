@@ -281,6 +281,13 @@
 .content__tasks .card:hover {
   box-shadow: 0 0 8px  black;
 }
+.content__tasks .card .edited-warning {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  font-size: 0.8rem;
+  opacity: 0.55;
+}
 .content__tasks .card .title {
   text-shadow: none;
   font-size: 0.9rem;
@@ -289,7 +296,7 @@
 }
 .content__tasks .card .details-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   border-bottom: 1px solid white;
   font-size: 0.7rem;
 }
@@ -322,7 +329,7 @@
 }
 .content__tasks .card .delete-btn {
   position: absolute;
-  top: 3px;
+  top: 22px;
   right: 3px;
   width: 15px;
   height: 15px;
@@ -340,10 +347,28 @@
 .content__tasks .card .delete-btn:hover {
   transform: scale(1.1);
   filter: contrast(400%);
+  background-color: #f1f0f0;
 }
 .content__tasks .card .expand-btn {
   display: none;
   background-color: green;
+}
+.content__tasks .card .edit-btn {
+  cursor: pointer;
+  width: 15px;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  height: 15px;
+  background-image: url(../static/pencil.png);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+}
+.content__tasks .card .edit-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background-color: #f1f0f0;
 }
 .content__tasks .card .card-status {
   display: flex;
@@ -365,6 +390,9 @@
   border: none;
   background-color: #c42020;
 }
+.content__tasks .card .card-status .status button.status-done {
+  background-color: #00ff00;
+}
 .content__tasks .card .card-status .status span {
   padding-left: 1px;
 }
@@ -372,9 +400,6 @@
   cursor: pointer;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.1);
-}
-.content__tasks .card .card-status .status-done button {
-  background-color: #00ff00;
 }
 .content__tasks .card .card-status .date {
   text-align: right;
