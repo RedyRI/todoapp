@@ -8,7 +8,7 @@ class Task {
         this.title = title;
         this.category = category;
         this.priority = priority;
-        this.date = format(new Date(), 'yyy-dd-MM HH:mm'); 
+        this.date = format(new Date(), 'yyy/dd/MM HH:mm'); 
     }
 
     set _title(value) {

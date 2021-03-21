@@ -35,14 +35,60 @@
 }
 .content {
   width: 100%;
-  height: 100vh;
+  height: 80vh;
+  overflow: hidden;
   color: white;
   font-family: 'Poppins', sans-serif;
   display: flex;
+  position: relative;
 }
 .content__side {
+  position: absolute;
+  width: 230px;
+  top: 0;
+  left: -230px;
   height: 100%;
+  border-right: 1px solid black;
   background-color: white;
+  transition: left 0.5s ease;
+}
+.content__side .arrow {
+  width: 25px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  border-radius: 50%;
+  color: crimson;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  letter-spacing: -0.2rem;
+  animation: arrowMove 1s ease infinite;
+  cursor: pointer;
+  animation: transform 1d ease forwards;
+}
+.content__side .rotate {
+  transform: rotate(180deg);
+  left: 105%;
+}
+@keyframes arrowMove {
+  0% {
+    letter-spacing: -0.7rem;
+  }
+  25% {
+    letter-spacing: -0.9rem;
+  }
+  50% {
+    letter-spacing: -1.1rem;
+  }
+  75% {
+    letter-spacing: -1.3rem;
+  }
+  100% {
+    letter-spacing: -1.5rem;
+  }
 }
 .content__side .menu-container ul {
   list-style: none;
@@ -61,11 +107,151 @@
 }
 .content__side .menu-container ul li:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 5px black;
+}
+.content__side .menu-container ul li span {
+  float: right;
+  padding: 0px 5px;
+  margin-left: 5px;
+}
+.content__side .menu-container ul li span:hover {
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+  border-radius: 50%;
+}
+.content__side .menu-container ul li:nth-child(1) {
+  border-top: 1px solid black;
+}
+.content .show {
+  left: 0;
 }
 .content__tasks {
+  overflow-y: scroll;
   flex: 1;
   height: 100%;
   background-color: lightgray;
+}
+.content__tasks h2 {
+  text-shadow: 0 0 5px black;
+}
+.content__tasks .form-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+.content__tasks .form-container .cancel {
+  font-family: 'Poppins';
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 25px 25px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  font-weight: bolder;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: red;
+  transition: font-size 0.1s ease;
+}
+.content__tasks .form-container .cancel:hover {
+  font-size: 1.5rem;
+}
+.content__tasks .form-container form {
+  border: solid black 1px;
+  background-color: white;
+  padding: 20px 25px;
+  width: 50%;
+  margin-top: 25px;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0 0 5px white;
+}
+.content__tasks .form-container form input[type=submit],
+.content__tasks .form-container form input[type=text],
+.content__tasks .form-container form textarea,
+.content__tasks .form-container form label {
+  display: block;
+}
+.content__tasks .form-container form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 5px 0 10px 0;
+}
+.content__tasks .form-container form input[type=text],
+.content__tasks .form-container form textarea {
+  outline: none;
+  width: 100%;
+  margin: 5px 0 10px 0;
+  padding: 10px 12px;
+  font-size: 1rem;
+}
+.content__tasks .form-container form input[type=text]:focus,
+.content__tasks .form-container form textarea:focus {
+  background-color: #eeeeee;
+}
+.content__tasks .form-container form input[type=submit] {
+  outline: none;
+  width: 100%;
+  margin: 5px 0 10px 0;
+  padding: 10px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.content__tasks .table-container {
+  width: 100%;
+  height: 100%;
+}
+.content__tasks .table-container table {
+  font-size: 0.9rem;
+  text-align: center;
+  color: black;
+  width: 100%;
+  border-collapse: collapse;
+}
+.content__tasks .table-container table th {
+  width: 25%;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+.content__tasks .table-container table tr {
+  position: relative;
+}
+.content__tasks .table-container table tr .expand-task {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-origin: red;
+}
+.content__tasks .table-container table tr .delete-task {
+  position: absolute;
+  width: 20px;
+  left: 20px;
+  font-size: 1rem;
+  top: 0;
+  right: 0;
+  background-color: crimson;
+  color: white;
+}
+.content__tasks .table-container table .description-row td {
+  font-size: 1rem;
+}
+.content__tasks .table-container table tr:nth-child(even) {
+  background-color: white;
 }
 * {
   margin: 0;
@@ -76,11 +262,19 @@
   background-color: white;
   display: flex;
   align-items: center;
-  height: 100px;
-  max-width: 1200px;
+  max-height: 10vh;
+  overflow: hidden;
   margin: 0 auto;
   padding: 5px 0;
   border-bottom: 1px solid black;
+}
+.header__options {
+  padding: 3px 5px;
+  height: 100%;
+  border-right: 3px dashed crimson;
+}
+.header__options select {
+  display: block;
 }
 .header__logo {
   flex: 1;
@@ -120,8 +314,12 @@
   background-size: cover;
 }
 .header__nav .add .image:hover {
-  transform: scale(0.98);
+  transform: scale(0.9);
   cursor: pointer;
+}
+.footer {
+  max-height: 10vh;
+  overflow: hidden;
 }
 .footer .logo h1 {
   font-family: 'Poppins';

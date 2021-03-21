@@ -1,4 +1,5 @@
 .content {
+    z-index: 10;
     width: 100%;
     height: 80vh;
     overflow: hidden;
@@ -12,17 +13,16 @@
         width: 230px;
         top: 0;
         left: -230px;
+        z-index: 5;
         height: 100%;
         border-right: 1px solid black;
         background-color: white;
         transition: left 0.5s ease;
         .arrow {
-            width: 25px;
-            height: 50px;
+            height: 20px;
             position: absolute;
-            bottom: 0;
+            bottom: 0%;
             left: 100%;
-            border-radius: 50%;
             color: crimson;
             display: flex;
             align-items: center;
@@ -32,6 +32,7 @@
             animation: arrowMove 1s ease infinite;
             cursor: pointer;
             animation: transform 1d ease forwards;
+            width: 40px;
         }
 
         .rotate {
@@ -57,6 +58,7 @@
         }
 
         .menu-container {
+            z-index: 5;
             ul {
                 list-style: none;
                 position: relative;
@@ -99,6 +101,7 @@
         left: 0;
     }
     &__tasks{
+        z-index: 4;
         overflow-y: scroll;
         flex: 1;
         height: 100%;
@@ -107,6 +110,7 @@
             text-shadow: 0 0 5px black;
         }
         .form-container {
+            z-index: 10;
             position: fixed;
             top: 0;
             left: 0;

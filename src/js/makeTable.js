@@ -18,8 +18,21 @@ function createCard() {
     const description = document.createElement('p')
     description.classList.add('description')
     
+    const cardStatus = document.createElement('div')
+    cardStatus.classList.add('card-status')
+    const status = document.createElement('div')
+    status.classList.add('status')
+    const btnStatus = document.createElement('button')
+    btnStatus.classList.add('s')
+    const textStatus = document.createElement('span')
+    textStatus.classList.add('s')
+    textStatus.textContent = 'pending'
     const date = document.createElement('div')
     date.classList.add('date')
+    status.appendChild(btnStatus)
+    status.appendChild(textStatus)
+    cardStatus.appendChild(status)
+    cardStatus.appendChild(date)
     
     const expandBtn = document.createElement('button')
     expandBtn.classList.add('expand-btn')
@@ -27,7 +40,6 @@ function createCard() {
     
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete-btn')
-    deleteBtn.textContent = 'delete';
     
     detailsContainer.appendChild(priority)
     detailsContainer.appendChild(category)
@@ -37,7 +49,7 @@ function createCard() {
     card.appendChild(h2);
     card.appendChild(detailsContainer);
     card.appendChild(descriptionContainer);
-    card.appendChild(date);
+    card.appendChild(cardStatus);
     card.appendChild(expandBtn);
     card.appendChild(deleteBtn);
     
@@ -46,6 +58,7 @@ function createCard() {
 
 function fillCard(card, task) {
 
+    card.setAttribute('data-id', task.id)
     card.querySelector('.title').textContent = task.title
     card.querySelector('.priority').textContent = task.priority
     card.querySelector('.category').textContent = task.category
