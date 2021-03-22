@@ -7,15 +7,15 @@ import { Task } from './task';
 import { createCard, fillCard } from './makeCard'
 // initialize
 const tasks = []
-const addFormContainer = createForm('Add new Task', 'submit', 'n')
+const addFormContainer = createForm('Add new Task', 'Add task', 'n')
 addFormContainer.classList.add('add-form-container')
 const editFormContainer = createForm('Edit task', 'save changes', 'e')
 editFormContainer.classList.add('edit-form-container')
 const cardsContainer = document.createElement('div')
-cardsContainer.classList.add('tables-container')
+cardsContainer.classList.add('cards-container')
 
 //  constructor(title, priority, description, category)
-let t1 = new Task('task1task1task1task1task1task1task1task1task1task1task1task1task1task1task1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `${format(new Date(), 'yyyy-MM-dd')}`)
+let t1 = new Task('task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `${format(new Date(), 'yyyy-MM-dd')}`)
 let t2 = new Task('task 2', 'important', 'this is the task number two', 'work', `${format(new Date(), 'yyyy-MM-dd')}`)
 let t3 = new Task('task 3', 'not important', 'this is the task number three', 'school', `${format(new Date(), 'yyyy-MM-dd')}`)
 let t4 = new Task('task 4', 'important', 'this is the task number four', 'shopping', `${format(new Date(), 'yyyy-MM-dd')}`)
@@ -132,6 +132,7 @@ function deleteOrUpdateCard(e) {
     } else if (e.target.classList.contains('expand-btn')) {
         console.log('asd');
         console.log(e.target.previousSibling.previousSibling);
+        e.target.parentNode.classList.toggle('card-grow')
         e.target.previousSibling.previousSibling.classList.toggle('show-description-container')
     }
 }

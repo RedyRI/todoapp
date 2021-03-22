@@ -14,10 +14,10 @@
         left: -230px;
         z-index: 5;
         height: 100%;
-        border-right: 1px solid black;
         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
         backdrop-filter: blur(0.1rem);
         transition: left 0.5s ease;
+        box-shadow: 0px 0px 5px black;
         .arrow {
             height: 20px;
             position: absolute;
@@ -185,16 +185,15 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background: linear-gradient(to right top, #65dfc9, #6cdbed);
     .header {
         height: 75px;
         width: 100%;
-        border: solid 1px red;
     }
     .content {
         flex: 1;
     }
     .footer {
-        border: solid 1px red;
         height: 75px;
     }
 }

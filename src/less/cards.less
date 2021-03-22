@@ -1,19 +1,21 @@
 .content__tasks {
     flex: 1;
     z-index: 4;
+    // background: linear-gradient(to right top, #929292, #000000);
     .cards-container {
-        display: flex;
-        height: 100%;
-        flex-wrap: wrap;
-        align-items: flex-start;
         overflow-y: scroll;
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 100%;
+        overflow-y: auto;
 
         .card {
             background-color: white;
             color: black;
             width: 23%;
-            margin: 2px 1%;
+            margin: 5px auto;
             padding: 5px;
+            width: 200px;
             display: flex;
             position: relative;
             flex-direction: column;
@@ -24,15 +26,18 @@
             }
             .title {
                 text-shadow: none;
-                font-size: 0.9rem;
+                font-size: 1.1rem;
                 padding: 0;
+                margin: 2px 0;
+                border-bottom: 1px solid black;
                 overflow-y: auto;
             }
             .details-container {
                 display: flex;
                 justify-content: flex-start;
                 border-bottom: 1px solid white;
-                font-size: 0.7rem;
+                font-size: 0.9rem;
+                font-weight: bolder;
                 .priority{
                     padding: 1px 7px;
                     border-bottom: 1px solid black;
@@ -65,20 +70,19 @@
                 background-color: lightgray;
                 padding: 5px 7px;
                 font-family: sans-serif;
-                line-height: 0.9rem;
                 p.description {
                     height: 100%;
                     overflow-y: auto;
-                    font-size: 0.9rem;
+                    font-size: 1.1rem;
                     
                 }
             }
             .delete-btn {
                 position: absolute;
-                top: 0;
-                right: 0;
-                width: 15px;
-                height: 15px;
+                top: 1px;
+                right: 1px;
+                width: 20px;
+                height: 20px;
                 outline: none;
                 cursor: pointer;
                 display: flex;
@@ -92,7 +96,6 @@
                 &:hover {
                     transform: scale(1.1);
                     filter:contrast(400%);
-
                 }
             }
             .expand-btn {
@@ -101,11 +104,11 @@
             }
             .edit-btn {
                 cursor: pointer;
-                width: 15px;
                 position: absolute;
-                top: 15px;
-                right: 0;
-                height: 15px;
+                top: 1px;
+                right: 22px;
+                width: 20px;
+                height: 20px;
                 background-image: url('../static/pencil.png');
                 background-size: cover;
                 background-position: center;
@@ -113,7 +116,8 @@
                 &:hover {
                     opacity: 1;
                     transform: scale(1.1);
-                    }
+                }
+
             }
             .card-status {
                 display: flex;
@@ -123,7 +127,8 @@
                     padding: 1px 0;
                     display: flex;
                     align-items: center;
-                    font-size: 0.7rem;
+                    font-size: 0.9rem;
+                    font-weight: bolder;
                     button {
                         cursor: pointer;
                         width: 10px;
@@ -147,7 +152,7 @@
                 }
                 .date { 
                     text-align: right;
-                    font-size: 0.6rem;
+                    font-size: 0.9rem;
                     font-weight: bolder;
                 }
 
@@ -157,34 +162,39 @@
     }
     .tables-container {
         height: 100%;
+        padding: 0 10px;
         overflow-y: scroll;
-        background: linear-gradient(to right top, #65dfc9, #6cdbed);
+        // background: linear-gradient(to right top, #65dfc9, #6cdbed);
+        // background: linear-gradient(to right top, #faeecd, #ffd412);
 
         .card {
             background-color: white;
             max-width: 1000px;
             color: black;
-            margin: 2px auto;
-            padding: 5px;
+            margin: 5px auto;
+            height: 110px;
+            padding: 5px 5px 25px 5px;
             display: flex;
             position: relative;
             flex-direction: column;
             background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
             backdrop-filter: blur(0.1rem);
-            border-radius: 10px;
+            // border-radius: 10px;
             transition:height 1s ease;
+            box-shadow: 0 0 2px  black;
+
             &:hover {
-                box-shadow: 0 0 2px  black;
+                box-shadow: 1px 1px 2px  black;
             }
             .title {
                 text-shadow: none;
-                font-size: 0.9rem;
+                font-size: 1.2rem;
                 padding: 0;
             }
             .details-container {
                 display: flex;
                 justify-content: flex-start;
-                font-size: 0.7rem;
+                font-size: 1rem;
                 width: 200px;
                 .priority{
                     padding: 1px 7px;
@@ -220,20 +230,22 @@
                 margin: 5px;
                 padding: 5px 7px;
                 font-family: sans-serif;
-                line-height: 1rem;
                 opacity: 0;
-                transition: opacity ease 3s;
+                visibility: hidden;
+                height: 0px;
                 p.description {
-                    font-size: 0.9rem;
-                    height: 0px;
-                    line-height: 1;
-                    transition: height ease 5s;
+                    font-size: 1.1rem;
                 }
             }
             .show-description-container {
-                opacity: 1;
-                p.description {
-                    height: auto;
+                animation: showDescription 1s ease forwards;
+            }
+            
+            @keyframes showDescription {
+                100% {
+                    visibility: visible;
+                    opacity: 1;
+                    height: 100%;
                 }
             }
             .delete-btn {
@@ -272,10 +284,7 @@
                 &:hover {
                     animation: arrowDown 0.7s ease infinite;
                 }
-                &:active {
-                    transform: rotate(180deg);
-                    background-color: red;
-                }
+
             }
 
             @keyframes arrowDown {
@@ -306,6 +315,9 @@
                     }
             }
             .card-status {
+                position: absolute;
+                bottom: 5px;
+                left: 5px;
                 display: flex;
                 align-items: center;
                 width: 200px;
@@ -314,7 +326,8 @@
                     padding: 1px 0;
                     display: flex;
                     align-items: center;
-                    font-size: 0.7rem;
+                    font-size: 0.9rem;
+                    font-weight: bolder;
                     button {
                         cursor: pointer;
                         width: 18px;
@@ -344,6 +357,9 @@
 
             }
 
-            }
+        }
+        .card-grow {
+            height: 250px;
+        }
     }
 }

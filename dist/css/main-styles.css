@@ -50,7 +50,8 @@
   z-index: 5;
   height: 100%;
   border-right: 1px solid black;
-  background-color: white;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+  backdrop-filter: blur(0.1rem);
   transition: left 0.5s ease;
 }
 .content__side .arrow {
@@ -207,6 +208,9 @@
   font-size: 1rem;
   cursor: pointer;
 }
+.content__tasks .form-container form input[type=date] {
+  width: 135px;
+}
 body {
   display: flex;
   flex-direction: column;
@@ -234,7 +238,6 @@ body .footer {
   flex-wrap: wrap;
   align-items: flex-start;
   overflow-y: scroll;
-  background-color: blue;
 }
 .content__tasks .cards-container .card {
   background-color: white;
@@ -376,6 +379,193 @@ body .footer {
 .content__tasks .cards-container .card .card-status .date {
   text-align: right;
   font-size: 0.6rem;
+  font-weight: bolder;
+}
+.content__tasks .tables-container {
+  height: 100%;
+  overflow-y: scroll;
+  background: linear-gradient(to right top, #65dfc9, #6cdbed);
+}
+.content__tasks .tables-container .card {
+  background-color: white;
+  max-width: 1000px;
+  color: black;
+  margin: 2px auto;
+  padding: 5px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+  backdrop-filter: blur(0.1rem);
+  border-radius: 10px;
+  transition: height 1s ease;
+}
+.content__tasks .tables-container .card:hover {
+  box-shadow: 0 0 2px  black;
+}
+.content__tasks .tables-container .card .title {
+  text-shadow: none;
+  font-size: 0.9rem;
+  padding: 0;
+}
+.content__tasks .tables-container .card .details-container {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 0.7rem;
+  width: 200px;
+}
+.content__tasks .tables-container .card .details-container .priority {
+  padding: 1px 7px;
+  border-bottom: 1px solid black;
+  color: black;
+  border-radius: 7px;
+  background-color: white;
+}
+.content__tasks .tables-container .card .details-container .category {
+  color: black;
+  background-color: white;
+  border-radius: 7px;
+  border-bottom: 1px solid black;
+  padding: 1px 7px;
+}
+.content__tasks .tables-container .card .details-container .edited-warning {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  float: right;
+  border-radius: 50%;
+  border-bottom: 1px solid black;
+  background-color: chocolate;
+}
+.content__tasks .tables-container .card .description-container {
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px 7px;
+  font-family: sans-serif;
+  line-height: 1rem;
+  opacity: 0;
+  transition: opacity ease 3s;
+}
+.content__tasks .tables-container .card .description-container p.description {
+  font-size: 0.9rem;
+  height: 0px;
+  line-height: 1;
+  transition: height ease 5s;
+}
+.content__tasks .tables-container .card .show-description-container {
+  opacity: 1;
+}
+.content__tasks .tables-container .card .show-description-container p.description {
+  height: auto;
+}
+.content__tasks .tables-container .card .delete-btn {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 25px;
+  height: 25px;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../static/clear.png);
+  background-color: transparent;
+  background-size: cover;
+  border: none;
+  background-position: center;
+}
+.content__tasks .tables-container .card .delete-btn:hover {
+  transform: scale(1.1);
+  filter: contrast(400%);
+}
+.content__tasks .tables-container .card .expand-btn {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  background-image: url(../static/down-arrow.png);
+  margin: 0 auto;
+  cursor: pointer;
+  width: 30px;
+  height: 24px;
+  background-size: cover;
+  background-position: center;
+}
+.content__tasks .tables-container .card .expand-btn:hover {
+  animation: arrowDown 0.7s ease infinite;
+}
+.content__tasks .tables-container .card .expand-btn:active {
+  transform: rotate(180deg);
+  background-color: red;
+}
+@keyframes arrowDown {
+  0% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+.content__tasks .tables-container .card .edit-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 3px;
+  right: 28px;
+  width: 25px;
+  height: 25px;
+  background-image: url(../static/pencil.png);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+}
+.content__tasks .tables-container .card .edit-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+.content__tasks .tables-container .card .card-status {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  justify-content: space-between;
+}
+.content__tasks .tables-container .card .card-status .status {
+  padding: 1px 0;
+  display: flex;
+  align-items: center;
+  font-size: 0.7rem;
+}
+.content__tasks .tables-container .card .card-status .status button {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  background-color: #c42020;
+}
+.content__tasks .tables-container .card .card-status .status button.status-done {
+  background-color: #00ff00;
+}
+.content__tasks .tables-container .card .card-status .status span {
+  padding-left: 3px;
+  font-size: 0.9rem;
+}
+.content__tasks .tables-container .card .card-status .status:hover {
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.content__tasks .tables-container .card .card-status .date {
+  font-size: 0.9rem;
+  font-weight: bolder;
 }
 * {
   margin: 0;

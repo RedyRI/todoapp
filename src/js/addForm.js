@@ -7,7 +7,9 @@ function createForm(title, btn, type) {
   cancel.textContent = 'x'
   let form = document.createElement('form');
   form.classList.add('form');
-  
+
+  let date = type == 'n' ? 'Choose': 'Edit';
+
   let formContent = `
   <label for="${type}title">Task title:</label>
   <input class="info form-title" placeholder="My task..." type="text" id="${type}title" name="title">
@@ -26,6 +28,7 @@ function createForm(title, btn, type) {
   </select>
   <label for="${type}description">Task description: </label>
   <textarea class="info form-description" placeholder="Describe your task..." id="${type}description" name="description" rows="4" cols="50"></textarea>
+  <label for="${type}date">${date} the date: </label>
   <input class="info form-date" type="date" value="" id="${type}date" name="date" autocomplete>
   <input type="submit" value="${btn}" id="${type}">
   `
