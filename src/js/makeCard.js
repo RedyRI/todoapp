@@ -34,9 +34,8 @@ function createCard() {
     cardStatus.appendChild(status)
     cardStatus.appendChild(date)
     
-    const expandBtn = document.createElement('button')
+    const expandBtn = document.createElement('div')
     expandBtn.classList.add('expand-btn')
-    expandBtn.textContent = 'expand';
 
     const editBtn = document.createElement('span')
     editBtn.classList.add('edit-btn')

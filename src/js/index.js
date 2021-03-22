@@ -1,3 +1,4 @@
+import { compareAsc,compareDesc, format } from 'date-fns'
 import { menuContainer as sideMenu } from './sideMenu';
 import { createForm } from './addForm'; 
 import '../less/index.less';
@@ -11,14 +12,14 @@ addFormContainer.classList.add('add-form-container')
 const editFormContainer = createForm('Edit task', 'save changes', 'e')
 editFormContainer.classList.add('edit-form-container')
 const cardsContainer = document.createElement('div')
-cardsContainer.classList.add('cards-container')
+cardsContainer.classList.add('tables-container')
 
 //  constructor(title, priority, description, category)
-let t1 = new Task('task1task1task1task1task1task1task1task1task1task1task1task1task1task1task1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home')
-let t2 = new Task('task 2', 'important', 'this is the task number two', 'work')
-let t3 = new Task('task 3', 'not important', 'this is the task number three', 'school')
-let t4 = new Task('task 4', 'important', 'this is the task number four', 'shopping')
-let t5 = new Task('task 5', 'urgent', 'this is the task number five', 'work')
+let t1 = new Task('task1task1task1task1task1task1task1task1task1task1task1task1task1task1task1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `${format(new Date(), 'yyyy-MM-dd')}`)
+let t2 = new Task('task 2', 'important', 'this is the task number two', 'work', `${format(new Date(), 'yyyy-MM-dd')}`)
+let t3 = new Task('task 3', 'not important', 'this is the task number three', 'school', `${format(new Date(), 'yyyy-MM-dd')}`)
+let t4 = new Task('task 4', 'important', 'this is the task number four', 'shopping', `${format(new Date(), 'yyyy-MM-dd')}`)
+let t5 = new Task('task 5', 'urgent', 'this is the task number five', 'work', `${format(new Date(), 'yyyy-MM-dd')}`)
 
 // cacheDOM
 const header = document.querySelector('.header')
@@ -40,7 +41,7 @@ tasks.push(t4)
 tasks.push(t5)
 
 tasks.forEach(task => {
-    render(task)
+    renderAsCards(task)
 })
 
 // bind events
@@ -51,6 +52,7 @@ cancelForm.addEventListener('click',hide);
 arrow.addEventListener('click', showMenu);
 tasksContainer.addEventListener('click', deleteOrUpdateCard);
 saveChangsBtn.addEventListener('click', edit)
+mode.addEventListener('change', checkMode)
 
 // render the initial content
 menuContainer.appendChild(sideMenu)
@@ -59,6 +61,12 @@ tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)
 
 // functions 
+
+function checkMode(e) {
+    cardsContainer.classList.toggle('cards-container')
+    cardsContainer.classList.toggle('tables-container')
+}
+
 function showMenu(e) {
     e.target.classList.toggle('rotate')
     e.target.parentNode.classList.toggle('show')
@@ -76,6 +84,8 @@ function hide(e) {
 
 function showForm(e) {
     addFormContainer.style.display = 'flex';
+    addFormContainer.querySelector('.form-date').setAttribute('value', `${format(new Date(), 'yyyy-MM-dd')}`)
+    addFormContainer.querySelector('.form-date').setAttribute('min', `${format(new Date(), 'yyyy-MM-dd')}`)
     checkSideMenu();
 }
 
@@ -89,23 +99,23 @@ function checkSideMenu() {
 
 function addTask(e) {
     e.preventDefault();
-    let t = getTask(e);
-    if(t != undefined) {
+    let task = getTask(e);
+    if(task != undefined) {
         addFormContainer.style.display = 'none';
-        tasks.push(t)
-        render(t)
+        tasks.push(task)
+        renderAsCards(task)
     }
 }
 
-function render(t) {
-    let m = mode.value == 1 ? renderAsCards : renderAsTable;
-    m(t)
-}
+// function render(task) {
+//     let renderMode = mode.value == 1 ? renderAsCards : renderAsTable;
+//     renderMode(task)
+// }
 
-function renderAsCards(t) {
-    let c = createCard();
-    fillCard(c, t, 'new')
-    cardsContainer.appendChild(c)
+function renderAsCards(task) {
+    let card = createCard();
+    fillCard(card, task, 'new')
+    cardsContainer.appendChild(card)
 }
 
 function deleteOrUpdateCard(e) {
@@ -119,6 +129,10 @@ function deleteOrUpdateCard(e) {
         let t = tasks.findIndex(task => task.id == dataId)
         tasks[t].edit = true; 
         showEditForm();
+    } else if (e.target.classList.contains('expand-btn')) {
+        console.log('asd');
+        console.log(e.target.previousSibling.previousSibling);
+        e.target.previousSibling.previousSibling.classList.toggle('show-description-container')
     }
 }
 
@@ -165,6 +179,9 @@ function showEditForm() {
     editFormContainer.querySelector('#epriority').value = t.priority
     editFormContainer.querySelector('#ecategory').value = t.category
     editFormContainer.querySelector('#edescription').value = t.description
+    editFormContainer.querySelector('#edate').value = t.date
+    editFormContainer.querySelector('#edate').setAttribute('min', `${format(new Date(), 'yyyy-MM-dd')}`)
+
     editFormContainer.style.display = 'flex';
 }
 
@@ -205,7 +222,7 @@ function getTask(e) {
     }
 
     if(allOk) {
-        let t = new Task(task.title, task.priority, task.description, task.category)
+        let t = new Task(task.title, task.priority, task.description, task.category, task.date)
         arrow.style.pointerEvents = 'all';
         resetForm(form)
         return t

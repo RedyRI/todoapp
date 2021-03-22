@@ -2938,10 +2938,9 @@ function createForm(title, btn, type) {
   <input class="info form-title" placeholder="My task..." type="text" id="${type}title" name="title">
   <label for="${type}priority">Priority :</label>
   <select class="info form-priority" name="priority" id="${type}priority">
-  <option value="NUI" selected>NOT urgent OR important</option>
-  <option value="UNI">Urgent NOT important</option>
-  <option value="INU">Important NOT urgent</option>
-  <option value="UAI">Urgent AND important</option>
+  <option value="urgent" selected>urgent</option>
+  <option value="important">important</option>
+  <option value="not important">not important</option>
   </select>
   <label for="${type}category">Category :</label>
   <select class="info form-category" name="category" id="${type}category">
@@ -2966,6 +2965,11 @@ function createForm(title, btn, type) {
 }
   
 
+  // <option value="NUI" selected>NOT urgent OR important</option>
+  // <option value="UNI">Urgent NOT important</option>
+  // <option value="INU">Important NOT urgent</option>
+  // <option value="UAI">Urgent AND important</option>
+
 /***/ }),
 
 /***/ "./src/js/idGen.js":
@@ -2989,10 +2993,10 @@ const idGen = (function() {
 
 /***/ }),
 
-/***/ "./src/js/makeTable.js":
-/*!*****************************!*\
-  !*** ./src/js/makeTable.js ***!
-  \*****************************/
+/***/ "./src/js/makeCard.js":
+/*!****************************!*\
+  !*** ./src/js/makeCard.js ***!
+  \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -3066,16 +3070,36 @@ function fillCard(card, task, type) {
 
     card.setAttribute('data-id', task.id)
     card.querySelector('.title').textContent = task.title
+
+    let taskpBackColor = task.priority == 'urgent' ? '#ffdddd':
+    task.priority == 'important' ? '#ffffcc': '#ddffdd';
+
+    let taskcBackColor = task.category == 'work' ? '#ff5722':
+    task.category == 'school' ? '#ff9800':
+    task.category == 'home' ? '#7dadc3': '#e91e63';
+
     card.querySelector('.priority').textContent = task.priority
+    card.querySelector('.priority').style.backgroundColor = taskpBackColor;
+
     card.querySelector('.category').textContent = task.category
+    card.querySelector('.category').style.backgroundColor = taskcBackColor;
+    card.querySelector('.category').style.fontWeigth = 'bolder';
+    
     card.querySelector('.description').textContent = task.description
     card.querySelector('.date').textContent = task.date
     if (type == 'edit') {
-        console.log('add an edited mark');
-        let edited = document.createElement('span')
-        edited.classList.add('edited-warning')
-        edited.textContent = '<edited>'
-        card.appendChild(edited)
+        let e = card.querySelector('.edited-warning');
+        if(!e) {
+            console.log('add an edited mark');
+            let edited = document.createElement('div')
+            let cont = card.querySelector('.details-container')
+            cont.style.justifyContent = 'space-between'
+            edited.classList.add('edited-warning')
+            edited.textContent = 'e'
+            cont.appendChild(edited)
+        } else {
+            console.log('edited already exists');
+        }
     }
 }
 
@@ -3279,7 +3303,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _less_index_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../less/index.less */ "./src/less/index.less");
 /* harmony import */ var _static_sheep_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../static/sheep.png */ "./src/static/sheep.png");
 /* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./task */ "./src/js/task.js");
-/* harmony import */ var _makeTable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./makeTable */ "./src/js/makeTable.js");
+/* harmony import */ var _makeCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./makeCard */ "./src/js/makeCard.js");
 
  
 
@@ -3292,13 +3316,15 @@ const addFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_1__.createForm)('A
 addFormContainer.classList.add('add-form-container')
 const editFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_1__.createForm)('Edit task', 'save changes', 'e')
 editFormContainer.classList.add('edit-form-container')
+const cardsContainer = document.createElement('div')
+cardsContainer.classList.add('cards-container')
 
 //  constructor(title, priority, description, category)
-let t1 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 1', 'UNI', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home')
-let t2 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 2', 'INU', 'this is the task number two', 'work')
-let t3 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 3', 'UAI', 'this is the task number three', 'school')
-let t4 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 4', 'NUI', 'this is the task number four', 'work')
-let t5 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 5', 'NUI', 'this is the task number five', 'work')
+let t1 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task1task1task1task1task1task1task1task1task1task1task1task1task1task1task1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home')
+let t2 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 2', 'important', 'this is the task number two', 'work')
+let t3 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 3', 'not important', 'this is the task number three', 'school')
+let t4 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 4', 'important', 'this is the task number four', 'shopping')
+let t5 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 5', 'urgent', 'this is the task number five', 'work')
 
 // cacheDOM
 const header = document.querySelector('.header')
@@ -3336,6 +3362,7 @@ saveChangsBtn.addEventListener('click', edit)
 menuContainer.appendChild(_sideMenu__WEBPACK_IMPORTED_MODULE_0__.menuContainer)
 tasksContainer.appendChild(addFormContainer)
 tasksContainer.appendChild(editFormContainer)
+tasksContainer.appendChild(cardsContainer)
 
 // functions 
 function showMenu(e) {
@@ -3349,6 +3376,7 @@ function hide(e) {
         editFormContainer.style.display = 'none'
         arrow.style.pointerEvents = 'all';
         cancelEdit();
+        resetForm(tasksContainer)
     }
 }
 
@@ -3381,9 +3409,9 @@ function render(t) {
 }
 
 function renderAsCards(t) {
-    let c = (0,_makeTable__WEBPACK_IMPORTED_MODULE_5__.createCard)();
-    (0,_makeTable__WEBPACK_IMPORTED_MODULE_5__.fillCard)(c, t, 'new')
-    tasksContainer.appendChild(c)
+    let c = (0,_makeCard__WEBPACK_IMPORTED_MODULE_5__.createCard)();
+    (0,_makeCard__WEBPACK_IMPORTED_MODULE_5__.fillCard)(c, t, 'new')
+    cardsContainer.appendChild(c)
 }
 
 function deleteOrUpdateCard(e) {
@@ -3405,8 +3433,9 @@ function cancelEdit() {
 }
 
 function deleteCard(e) {
+    console.log(e.target.parentNode);
     tasks.splice(tasks.findIndex(item => item.id == e.target.parentNode.getAttribute('data-id')),1)
-    tasksContainer.removeChild(e.target.parentNode)
+    cardsContainer.removeChild(e.target.parentNode)
 }
 
 function updateState(e) {
@@ -3459,41 +3488,46 @@ function editTask(editedTask) {
             }
         }
     }
-    (0,_makeTable__WEBPACK_IMPORTED_MODULE_5__.fillCard)(cardToEdit, t, 'edit')
+    (0,_makeCard__WEBPACK_IMPORTED_MODULE_5__.fillCard)(cardToEdit, t, 'edit')
 }
 
 
 function getTask(e) {
     let allOk = true; 
     let task = {}
-    let items = e.target.parentNode.children;
-    for (let i = 0; i < items.length; i++) {
-        if(items[i].classList.contains('info')) {
-            let id = items[i].getAttribute('id').slice(1,); 
-            if(items[i].value == '') {
-                alert(`${id} missing`);
-                allOk = false; 
-                break;
-            } else {
-                task[id] = items[i].value;
-                if(id == `title` || id == `description`) {
-                    items[i].value = ''
-                }
+    
+    let form = e.target.parentNode.parentNode
+    let info  = form.querySelectorAll('.info')
+
+    for (let element of info) {
+        console.log(element.name, element.value);
+        if(element.name == 'title' || element.name == 'description') {
+            if(element.value == '') {
+                alert(`${element.name} missing`);
+                allOk = false;
             }
         }
+        task[element.name] = element.value;
     }
 
     if(allOk) {
         let t = new _task__WEBPACK_IMPORTED_MODULE_4__.Task(task.title, task.priority, task.description, task.category)
         arrow.style.pointerEvents = 'all';
+        resetForm(form)
         return t
     } else {
-        let val = task.title == undefined ? '': task.title; 
-        items[1].value = val;
+        info[0].value = task.title == undefined ? '': task.title; 
     }
+
 }
 
-console.log(tasks);
+function resetForm(form) {
+    let info = form.querySelectorAll('.info')
+    info[0].value = ''
+    info[1].value = 'urgent'
+    info[2].value = 'work'
+    info[3].value = ''
+}
 })();
 
 /******/ })()

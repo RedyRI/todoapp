@@ -225,15 +225,18 @@ body .footer {
   height: 75px;
 }
 .content__tasks {
-  display: flex;
-  flex-wrap: wrap;
-  z-index: 4;
   flex: 1;
-  align-items: flex-start;
-  overflow-y: auto;
-  background-color: lightgray;
+  z-index: 4;
 }
-.content__tasks .card {
+.content__tasks .cards-container {
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  overflow-y: scroll;
+  background-color: blue;
+}
+.content__tasks .cards-container .card {
   background-color: white;
   color: black;
   width: 23%;
@@ -243,45 +246,49 @@ body .footer {
   position: relative;
   flex-direction: column;
   box-shadow: 0 0 5px black;
-  height: 250px;
+  height: 225px;
 }
-.content__tasks .card:hover {
+.content__tasks .cards-container .card:hover {
   box-shadow: 0 0 8px  black;
 }
-.content__tasks .card .edited-warning {
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  font-size: 0.8rem;
-  opacity: 0.55;
-}
-.content__tasks .card .title {
+.content__tasks .cards-container .card .title {
   text-shadow: none;
   font-size: 0.9rem;
   padding: 0;
   overflow-y: auto;
 }
-.content__tasks .card .details-container {
+.content__tasks .cards-container .card .details-container {
   display: flex;
   justify-content: flex-start;
   border-bottom: 1px solid white;
   font-size: 0.7rem;
 }
-.content__tasks .card .details-container .priority {
+.content__tasks .cards-container .card .details-container .priority {
   padding: 1px 7px;
   border-bottom: 1px solid black;
   color: black;
   border-radius: 7px;
   background-color: white;
 }
-.content__tasks .card .details-container .category {
+.content__tasks .cards-container .card .details-container .category {
   color: black;
   background-color: white;
   border-radius: 7px;
   border-bottom: 1px solid black;
   padding: 1px 7px;
 }
-.content__tasks .card .description-container {
+.content__tasks .cards-container .card .details-container .edited-warning {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  float: right;
+  border-radius: 50%;
+  background-color: chocolate;
+}
+.content__tasks .cards-container .card .description-container {
   flex: 1;
   overflow-y: auto;
   background-color: lightgray;
@@ -289,15 +296,15 @@ body .footer {
   font-family: sans-serif;
   line-height: 0.9rem;
 }
-.content__tasks .card .description-container p.description {
+.content__tasks .cards-container .card .description-container p.description {
   height: 100%;
   overflow-y: auto;
   font-size: 0.9rem;
 }
-.content__tasks .card .delete-btn {
+.content__tasks .cards-container .card .delete-btn {
   position: absolute;
-  top: 22px;
-  right: 3px;
+  top: 0;
+  right: 0;
   width: 15px;
   height: 15px;
   outline: none;
@@ -311,44 +318,42 @@ body .footer {
   border: none;
   background-position: center;
 }
-.content__tasks .card .delete-btn:hover {
+.content__tasks .cards-container .card .delete-btn:hover {
   transform: scale(1.1);
   filter: contrast(400%);
-  background-color: #f1f0f0;
 }
-.content__tasks .card .expand-btn {
+.content__tasks .cards-container .card .expand-btn {
   display: none;
   background-color: green;
 }
-.content__tasks .card .edit-btn {
+.content__tasks .cards-container .card .edit-btn {
   cursor: pointer;
   width: 15px;
   position: absolute;
-  top: 22px;
-  right: 22px;
+  top: 15px;
+  right: 0;
   height: 15px;
   background-image: url(../static/pencil.png);
   background-size: cover;
   background-position: center;
   opacity: 0.8;
 }
-.content__tasks .card .edit-btn:hover {
+.content__tasks .cards-container .card .edit-btn:hover {
   opacity: 1;
   transform: scale(1.1);
-  background-color: #f1f0f0;
 }
-.content__tasks .card .card-status {
+.content__tasks .cards-container .card .card-status {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.content__tasks .card .card-status .status {
+.content__tasks .cards-container .card .card-status .status {
   padding: 1px 0;
   display: flex;
   align-items: center;
   font-size: 0.7rem;
 }
-.content__tasks .card .card-status .status button {
+.content__tasks .cards-container .card .card-status .status button {
   cursor: pointer;
   width: 10px;
   height: 10px;
@@ -357,18 +362,18 @@ body .footer {
   border: none;
   background-color: #c42020;
 }
-.content__tasks .card .card-status .status button.status-done {
+.content__tasks .cards-container .card .card-status .status button.status-done {
   background-color: #00ff00;
 }
-.content__tasks .card .card-status .status span {
+.content__tasks .cards-container .card .card-status .status span {
   padding-left: 1px;
 }
-.content__tasks .card .card-status .status:hover {
+.content__tasks .cards-container .card .card-status .status:hover {
   cursor: pointer;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.1);
 }
-.content__tasks .card .card-status .date {
+.content__tasks .cards-container .card .card-status .date {
   text-align: right;
   font-size: 0.6rem;
 }
@@ -387,16 +392,20 @@ body .footer {
   border-bottom: 1px solid black;
 }
 .header__options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 3px 5px;
   height: 100%;
   border-right: 3px dashed crimson;
+  border-left: 3px dashed crimson;
 }
 .header__options select {
-  display: block;
+  padding: 5px 7px;
 }
 .header__logo {
   flex: 1;
-  border-right: 3px dashed crimson;
   padding-left: 25px;
 }
 .header__logo h1 {

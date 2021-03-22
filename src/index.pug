@@ -2,6 +2,7 @@ doctype html
 html 
     head 
         title Todo-app
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
     body 
         .header 
             .header__logo 
@@ -10,8 +11,8 @@ html
             .header__options 
                 label(for='mode') Show as:  
                 select(name='mode' id='mode' class='mode')
-                    option(value='1') Cards
-                    option(value="2") table
+                    option(value="table") table
+                    option(value="card") card
             .header__nav 
                 .add
                     .wave

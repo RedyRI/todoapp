@@ -26,6 +26,7 @@ function createForm(title, btn, type) {
   </select>
   <label for="${type}description">Task description: </label>
   <textarea class="info form-description" placeholder="Describe your task..." id="${type}description" name="description" rows="4" cols="50"></textarea>
+  <input class="info form-date" type="date" value="" id="${type}date" name="date" autocomplete>
   <input type="submit" value="${btn}" id="${type}">
   `
   form.innerHTML = formContent;
