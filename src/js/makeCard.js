@@ -64,16 +64,36 @@ function fillCard(card, task, type) {
 
     card.setAttribute('data-id', task.id)
     card.querySelector('.title').textContent = task.title
+
+    let taskpBackColor = task.priority == 'urgent' ? '#ffdddd':
+    task.priority == 'important' ? '#ffffcc': '#ddffdd';
+
+    let taskcBackColor = task.category == 'work' ? '#ff5722':
+    task.category == 'school' ? '#ff9800':
+    task.category == 'home' ? '#7dadc3': '#e91e63';
+
     card.querySelector('.priority').textContent = task.priority
+    card.querySelector('.priority').style.backgroundColor = taskpBackColor;
+
     card.querySelector('.category').textContent = task.category
+    card.querySelector('.category').style.backgroundColor = taskcBackColor;
+    card.querySelector('.category').style.fontWeigth = 'bolder';
+    
     card.querySelector('.description').textContent = task.description
     card.querySelector('.date').textContent = task.date
     if (type == 'edit') {
-        console.log('add an edited mark');
-        let edited = document.createElement('span')
-        edited.classList.add('edited-warning')
-        edited.textContent = '<edited>'
-        card.appendChild(edited)
+        let e = card.querySelector('.edited-warning');
+        if(!e) {
+            console.log('add an edited mark');
+            let edited = document.createElement('div')
+            let cont = card.querySelector('.details-container')
+            cont.style.justifyContent = 'space-between'
+            edited.classList.add('edited-warning')
+            edited.textContent = 'e'
+            cont.appendChild(edited)
+        } else {
+            console.log('edited already exists');
+        }
     }
 }
 

@@ -13,10 +13,9 @@ function createForm(title, btn, type) {
   <input class="info form-title" placeholder="My task..." type="text" id="${type}title" name="title">
   <label for="${type}priority">Priority :</label>
   <select class="info form-priority" name="priority" id="${type}priority">
-  <option value="NUI" selected>NOT urgent OR important</option>
-  <option value="UNI">Urgent NOT important</option>
-  <option value="INU">Important NOT urgent</option>
-  <option value="UAI">Urgent AND important</option>
+  <option value="urgent" selected>urgent</option>
+  <option value="important">important</option>
+  <option value="not important">not important</option>
   </select>
   <label for="${type}category">Category :</label>
   <select class="info form-category" name="category" id="${type}category">
@@ -40,3 +39,8 @@ function createForm(title, btn, type) {
 
 }
   export { createForm }
+
+  // <option value="NUI" selected>NOT urgent OR important</option>
+  // <option value="UNI">Urgent NOT important</option>
+  // <option value="INU">Important NOT urgent</option>
+  // <option value="UAI">Urgent AND important</option>

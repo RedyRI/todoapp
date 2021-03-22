@@ -1,11 +1,14 @@
 .content__tasks {
-    display: flex;
-    flex-wrap: wrap;
-    z-index: 4;
     flex: 1;
+    z-index: 4;
+    .cards-container {
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
     align-items: flex-start;
-    overflow-y: auto;
-    background-color: lightgray;
+    overflow-y: scroll;
+    background-color: blue;
+
     .card {
         background-color: white;
         color: black;
@@ -16,16 +19,9 @@
         position: relative;
         flex-direction: column;
         box-shadow: 0 0 5px black;
-        height: 250px;
+        height: 225px;
         &:hover {
             box-shadow: 0 0 8px  black;
-        }
-        .edited-warning {
-            position: absolute;
-            top: 3px;
-            right: 3px;
-            font-size: 0.8rem;
-            opacity: 0.55;
         }
         .title {
             text-shadow: none;
@@ -52,6 +48,17 @@
                 border-bottom: 1px solid black;
                 padding: 1px 7px;
             }
+            .edited-warning {
+                font-size: 0.8rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 22px;
+                height: 22px;
+                float: right;
+                border-radius: 50%;
+                background-color: chocolate;
+            }
         }   
         .description-container {
             flex: 1;
@@ -69,8 +76,8 @@
         }
         .delete-btn {
             position: absolute;
-            top: 22px;
-            right: 3px;
+            top: 0;
+            right: 0;
             width: 15px;
             height: 15px;
             outline: none;
@@ -86,7 +93,6 @@
             &:hover {
                 transform: scale(1.1);
                 filter:contrast(400%);
-                background-color: rgb(241, 240, 240);
 
             }
         }
@@ -98,8 +104,8 @@
             cursor: pointer;
             width: 15px;
             position: absolute;
-            top: 22px;
-            right: 22px;
+            top: 15px;
+            right: 0;
             height: 15px;
             background-image: url('../static/pencil.png');
             background-size: cover;
@@ -108,7 +114,6 @@
             &:hover {
                 opacity: 1;
                 transform: scale(1.1);
-                background-color: rgb(241, 240, 240);
             }
         }
         .card-status {
@@ -148,5 +153,6 @@
 
         }
 
+    }
     }
 }

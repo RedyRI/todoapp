@@ -3,20 +3,22 @@ import { createForm } from './addForm';
 import '../less/index.less';
 import '../static/sheep.png';
 import { Task } from './task';
-import { createCard, fillCard } from './makeTable'
+import { createCard, fillCard } from './makeCard'
 // initialize
 const tasks = []
 const addFormContainer = createForm('Add new Task', 'submit', 'n')
 addFormContainer.classList.add('add-form-container')
 const editFormContainer = createForm('Edit task', 'save changes', 'e')
 editFormContainer.classList.add('edit-form-container')
+const cardsContainer = document.createElement('div')
+cardsContainer.classList.add('cards-container')
 
 //  constructor(title, priority, description, category)
-let t1 = new Task('task 1', 'UNI', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home')
-let t2 = new Task('task 2', 'INU', 'this is the task number two', 'work')
-let t3 = new Task('task 3', 'UAI', 'this is the task number three', 'school')
-let t4 = new Task('task 4', 'NUI', 'this is the task number four', 'work')
-let t5 = new Task('task 5', 'NUI', 'this is the task number five', 'work')
+let t1 = new Task('task1task1task1task1task1task1task1task1task1task1task1task1task1task1task1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home')
+let t2 = new Task('task 2', 'important', 'this is the task number two', 'work')
+let t3 = new Task('task 3', 'not important', 'this is the task number three', 'school')
+let t4 = new Task('task 4', 'important', 'this is the task number four', 'shopping')
+let t5 = new Task('task 5', 'urgent', 'this is the task number five', 'work')
 
 // cacheDOM
 const header = document.querySelector('.header')
@@ -54,6 +56,7 @@ saveChangsBtn.addEventListener('click', edit)
 menuContainer.appendChild(sideMenu)
 tasksContainer.appendChild(addFormContainer)
 tasksContainer.appendChild(editFormContainer)
+tasksContainer.appendChild(cardsContainer)
 
 // functions 
 function showMenu(e) {
@@ -67,6 +70,7 @@ function hide(e) {
         editFormContainer.style.display = 'none'
         arrow.style.pointerEvents = 'all';
         cancelEdit();
+        resetForm(tasksContainer)
     }
 }
 
@@ -101,7 +105,7 @@ function render(t) {
 function renderAsCards(t) {
     let c = createCard();
     fillCard(c, t, 'new')
-    tasksContainer.appendChild(c)
+    cardsContainer.appendChild(c)
 }
 
 function deleteOrUpdateCard(e) {
@@ -123,8 +127,9 @@ function cancelEdit() {
 }
 
 function deleteCard(e) {
+    console.log(e.target.parentNode);
     tasks.splice(tasks.findIndex(item => item.id == e.target.parentNode.getAttribute('data-id')),1)
-    tasksContainer.removeChild(e.target.parentNode)
+    cardsContainer.removeChild(e.target.parentNode)
 }
 
 function updateState(e) {
@@ -184,31 +189,36 @@ function editTask(editedTask) {
 function getTask(e) {
     let allOk = true; 
     let task = {}
-    let items = e.target.parentNode.children;
-    for (let i = 0; i < items.length; i++) {
-        if(items[i].classList.contains('info')) {
-            let id = items[i].getAttribute('id').slice(1,); 
-            if(items[i].value == '') {
-                alert(`${id} missing`);
-                allOk = false; 
-                break;
-            } else {
-                task[id] = items[i].value;
-                if(id == `title` || id == `description`) {
-                    items[i].value = ''
-                }
+    
+    let form = e.target.parentNode.parentNode
+    let info  = form.querySelectorAll('.info')
+
+    for (let element of info) {
+        console.log(element.name, element.value);
+        if(element.name == 'title' || element.name == 'description') {
+            if(element.value == '') {
+                alert(`${element.name} missing`);
+                allOk = false;
             }
         }
+        task[element.name] = element.value;
     }
 
     if(allOk) {
         let t = new Task(task.title, task.priority, task.description, task.category)
         arrow.style.pointerEvents = 'all';
+        resetForm(form)
         return t
     } else {
-        let val = task.title == undefined ? '': task.title; 
-        items[1].value = val;
+        info[0].value = task.title == undefined ? '': task.title; 
     }
+
 }
 
-console.log(tasks);
+function resetForm(form) {
+    let info = form.querySelectorAll('.info')
+    info[0].value = ''
+    info[1].value = 'urgent'
+    info[2].value = 'work'
+    info[3].value = ''
+}
