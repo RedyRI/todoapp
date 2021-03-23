@@ -8,12 +8,42 @@ html
             .header__logo 
                 .logo-container 
                     h1 ToDoApp 
-            .header__options 
-                label(for='mode') Show as:  
-                select(name='mode' id='mode' class='mode')
-                    option(value="card") card
-                    option(value="table") table
-            .header__nav 
+            .header__options
+                .first-half 
+                    .mode
+                        label(for='mode') Show as:  
+                        select(name='mode' id='mode' class='mode')
+                            option(value="card") card
+                            option(value="table") table
+                    .category
+                        label(for='category') Category
+                        select(class='header-menu-item' name="category" id='category')
+                            option(value="-" disabled selected) ---- 
+                            option(value="work") Work
+                            option(value="home") Home
+                            option(value="school") School
+                            option(value="shopping") Shopping   
+                    .priority 
+                        label(for="priority") Priority 
+                        select(class='header-menu-item' name="priority" id='priority')
+                            option(value="-" disabled selected) ---- 
+                            option(value="urgent") Urgent
+                            option(value="important") Important
+                            option(value="not important") Not Important
+                .second-half 
+                    .date
+                        label(for="date") Date
+                        select(class='header-menu-item' name="date" id='date')
+                            option(value="-" disabled selected) ---- 
+                            option(value="ascendant") Ascendant
+                            option(value="descendant") Descendant
+                    .done
+                        label(for="done") Done: 
+                        select(class='header-menu-item' name="done" id='done')
+                            option(value="-" disabled selected) ---- 
+                            option(value="done") Done
+                            option(value="pending") Pending    
+            .header__nav    
                 .add
                     .wave
                     .image

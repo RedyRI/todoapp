@@ -5,7 +5,7 @@ import '../static/sheep.png';
 import { Task } from './task';
 import { createCard, fillCard } from './makeCard'
 import { addMenuAnimation } from './submenuTransition'
-import { filter, addFilterLabel, removeFilterLabel, updateCount } from './filter'
+import { filter, addFilterLabel, removeFilterLabel, updateCount, getOption } from './filter'
 
 // initialize
 addMenuAnimation();
@@ -39,6 +39,7 @@ const cancelForm = addFormContainer.querySelector('.cancel')
 const cancelEditForm = editFormContainer.querySelector('.cancel')
 const submenuItems = [...document.querySelectorAll('.submenu-item')]
 const resetFiltertn = menuContainer.querySelector('.reset-filter')
+const headerMenuItems = [...header.querySelectorAll('.header-menu-item')]
 
 tasks.push(t1)
 tasks.push(t2)
@@ -63,6 +64,7 @@ saveChangsBtn.addEventListener('click', edit)
 mode.addEventListener('change', checkMode)
 submenuItems.forEach(item => { item.addEventListener('click', startFilter) })
 resetFiltertn.addEventListener('click', resetFilter)
+headerMenuItems.forEach(item => item.addEventListener('change', getValue))
 
 // render the initial content
 tasksContainer.appendChild(addFormContainer)
@@ -70,17 +72,28 @@ tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)
 
 // functions 
+function getValue(e) {
+    let value = e.target.value;
+    if(value != '-') {
+        startFilter(value)
+    }
+}
+
 function resetFilter(e) {
     let cards = [...cardsContainer.querySelectorAll('.card')]
-    cards.forEach(card => {
-        card.style.display = 'flex'
-    })
+    cards.forEach(card => card.style.display = 'flex')
     filteredCards = ['start'];
+    headerMenuItems.forEach(item => item.value = '-')
     removeFilterLabel(tasksContainer);
 }
 function startFilter(e) {
-    console.log(typeof(e) == 'string');
-    let value = e.target.textContent;
+    let value = typeof(e) == 'string' ? e : e.target.textContent;
+    if(typeof(e) != 'string') {
+        let opt = getOption(value);
+        headerMenuItems.find(item => item.name == opt).value = value
+    }
+
+    // let value = e.target.textContent;
     addFilterLabel(tasksContainer, cardsContainer, value)
     if(filteredCards.indexOf('start') == 0) {
         filteredCards = [...cardsContainer.querySelectorAll('.card')];
@@ -153,11 +166,6 @@ function addTask(e) {
     }
 }
 
-// function render(task) {
-//     let renderMode = mode.value == 1 ? renderAsCards : renderAsTable;
-//     renderMode(task)
-// }
-
 function renderAsCards(task) {
     let card = createCard();
     fillCard(card, task, 'new')
@@ -177,9 +185,19 @@ function deleteOrUpdateCard(e) {
         showEditForm();
     } else if (e.target.classList.contains('expand-btn')) {
         console.log('asd');
-        console.log(e.target.previousSibling.previousSibling);
-        e.target.parentNode.classList.toggle('card-grow')
-        e.target.previousSibling.previousSibling.classList.toggle('show-description-container')
+        let description = e.target.previousSibling.previousSibling.firstElementChild;
+        let height = description.scrollHeight; 
+        if(description.classList.contains('dropdown')) {
+            description.classList.toggle('dropdown')
+            description.removeAttribute('style')
+            e.target.removeAttribute('style')
+        }else {
+            description.classList.toggle('dropdown')
+            description.style.height = `${height}px`
+            description.style.margin = `5px 7px`
+            e.target.style.transform = 'rotate(180deg)'
+        }
+        console.log(e.target.previousSibling.previousSibling.firstElementChild);
     }
 }
 
