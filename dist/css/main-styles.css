@@ -149,8 +149,64 @@
 .content .show {
   left: 0;
 }
-.content__tasks h2 {
-  text-shadow: 0 0 5px black;
+.content__tasks .filter-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+  border-bottom: 1px solid black;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: black;
+}
+.content__tasks .filter-header .count {
+  font-size: 1rem;
+  margin: 0 3px;
+}
+.content__tasks .filter-header .work {
+  background-color: #ff5722;
+}
+.content__tasks .filter-header .home {
+  background-color: #7dadc3;
+}
+.content__tasks .filter-header .school {
+  background-color: #ff9800;
+}
+.content__tasks .filter-header .important {
+  background-color: #ffffcc;
+}
+.content__tasks .filter-header .not-important {
+  background-color: #ddffdd;
+}
+.content__tasks .filter-header .urgent {
+  background-color: #ffdddd;
+}
+.content__tasks .filter-header .shopping {
+  background-color: #e91e63;
+}
+.content__tasks .filter-header .done {
+  background-color: #00ff00;
+}
+.content__tasks .filter-header .pending {
+  background-color: #c42020;
+}
+.content__tasks .filter-header .work,
+.content__tasks .filter-header .home,
+.content__tasks .filter-header .school,
+.content__tasks .filter-header .shopping,
+.content__tasks .filter-header .important,
+.content__tasks .filter-header .not-important,
+.content__tasks .filter-header .urgent,
+.content__tasks .filter-header .done,
+.content__tasks .filter-header .pending {
+  text-transform: capitalize;
+  display: inline-block;
+  padding: 1px 7px;
+  margin: 0 5px;
+  border-radius: 7px;
+  font-size: 1rem;
 }
 .content__tasks .form-container {
   z-index: 10;
@@ -164,6 +220,9 @@
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
+}
+.content__tasks .form-container h2 {
+  text-shadow: 0 0 5px black;
 }
 .content__tasks .form-container .cancel {
   font-family: 'Poppins';

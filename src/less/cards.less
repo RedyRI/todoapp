@@ -163,16 +163,18 @@
     .tables-container {
         height: 100%;
         padding: 0 10px;
-        overflow-y: scroll;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
         // background: linear-gradient(to right top, #65dfc9, #6cdbed);
         // background: linear-gradient(to right top, #faeecd, #ffd412);
 
         .card {
             background-color: white;
-            max-width: 1000px;
+            width: 80%;
             color: black;
             margin: 5px auto;
-            height: 110px;
+            max-height: 100px;
             padding: 5px 5px 25px 5px;
             display: flex;
             position: relative;
@@ -182,6 +184,8 @@
             // border-radius: 10px;
             transition:height 1s ease;
             box-shadow: 0 0 2px  black;
+            flex-grow: 1;
+            transition: all 0.5s;
 
             &:hover {
                 box-shadow: 1px 1px 2px  black;
@@ -359,7 +363,7 @@
 
         }
         .card-grow {
-            height: 250px;
+            max-height: 250px;
         }
     }
 }

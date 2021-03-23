@@ -1,34 +1,55 @@
 let filterValues = [];
 
-function filter(value, cards) {
+function filter(value, cards, tasks) {
+  let filteredCards;
+  let orderedCards;
+  let orderedTasks;
   if(filterValues.indexOf(value) == -1) {
-    filterValues.push(value)
-    let filteredCards;
-    let option;
-    let val = value;
-    
-    if(val == 'home' || val == 'shopping' || val == 'school' || val == 'work') {
-      option = 'category'
-    } else if (val == 'not important' || val == 'important' || val == 'urgent') {
-      option = 'priority'
-    } else if(val == 'pending' || val == 'done'){
-      option = 'done'
-    } else {
-      option = 'date'
-    }
-    
-    filteredCards = cards.filter(card => {
-      let cardOption = card.querySelector(`.${option}`);
-      console.log(cardOption);
-      console.log(cardOption.textContent);
-      if(cardOption.textContent != val) {
-        card.style.display = 'none'
+    if(value== 'ascendant' || value == 'descendant') {
+      if(value == 'ascendant') {
+        console.log('value is ascendant');
+        orderedTasks = tasks.sort((a,b) => a.date > b.date ? 1: -1);
       } else {
-        card.style.display = 'flex'
+        console.log('value is descendant');
+        orderedTasks = tasks.sort((a,b) => a.date > b.date ? -1: 1);
       }
-      return cardOption.textContent == val
-    })
-    console.log(filteredCards);
+      let i = 1;
+      orderedTasks.forEach(task => {
+         cards.find(card => card.getAttribute('data-id') == task.id).style.order = `${i}`;
+         i++;
+       });
+      console.log(orderedTasks);
+      filterValues.push(value )
+      filteredCards = cards;
+    } else {
+
+      filterValues.push(value)
+      let option;
+      let val = value;
+      
+      if(val == 'home' || val == 'shopping' || val == 'school' || val == 'work') {
+        option = 'category'
+      } else if (val == 'not important' || val == 'important' || val == 'urgent') {
+        option = 'priority'
+      } else if(val == 'pending' || val == 'done'){
+        option = 'done'
+      } else {
+        option = 'date'
+      }
+      
+      filteredCards = cards.filter(card => {
+        let cardOption = card.querySelector(`.${option}`);
+        console.log(cardOption);
+        console.log(cardOption.textContent);
+        if(cardOption.textContent != val) {
+          card.style.display = 'none'
+        } else {
+          card.style.display = 'flex'
+        }
+        return cardOption.textContent == val
+      })
+      console.log(filteredCards);
+    }
     return filteredCards;
   }
 }
@@ -44,7 +65,7 @@ function addFilterLabel(cont,ref, value) {
       const filterHeader = document.createElement('div')
       filterHeader.classList.add('filter-header')
       let content = `
-      filter : <span class='count'></span> 
+      filter : <span class='count'></span> <span class='close'></span> 
       `
       filterHeader.innerHTML = content;  
       cont.insertBefore(filterHeader, ref)

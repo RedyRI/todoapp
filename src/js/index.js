@@ -19,12 +19,12 @@ const cardsContainer = document.createElement('div')
 cardsContainer.classList.add('cards-container')
 
 //  constructor(title, priority, description, category)
-let t1 = new Task('task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `${format(new Date(), 'yyyy-MM-dd')}`)
-let t2 = new Task('task 2', 'important', 'this is the task number two', 'work', `${format(new Date(), 'yyyy-MM-dd')}`)
-let t3 = new Task('task 3', 'not important', 'this is the task number three', 'school', `${format(new Date(), 'yyyy-MM-dd')}`)
-let t4 = new Task('task 4', 'important', 'this is the task number four', 'shopping', `${format(new Date(), 'yyyy-MM-dd')}`)
-let t5 = new Task('task 5', 'urgent', 'this is the task number five', 'work', `${format(new Date(), 'yyyy-MM-dd')}`)
-
+let t1 = new Task('task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `2022-05-22`)
+let t2 = new Task('task 2', 'important', 'this is the task number two', 'work', `2020-11-10`)
+let t3 = new Task('task 3', 'not important', 'this is the task number three', 'school', `2019-10-10`)
+let t4 = new Task('task 4', 'important', 'this is the task number four', 'shopping', `2022-01-10`)
+let t5 = new Task('task 5', 'urgent', 'this is the task number five', 'work', '2021-12-11')
+// ${format(new Date(), 'yyyy-MM-dd')} ** a way to format the date
 // cacheDOM
 const header = document.querySelector('.header')
 const addBtn = header.querySelector('.add');
@@ -49,6 +49,8 @@ tasks.push(t5)
 tasks.forEach(task => {
     renderAsCards(task)
 })
+
+console.log(tasks[0].date > tasks[2].date);
 
 // bind events
 window.addEventListener('click', hide);
@@ -84,7 +86,9 @@ function startFilter(e) {
         filteredCards = [...cardsContainer.querySelectorAll('.card')];
     }
     // let cards = [...cardsContainer.querySelectorAll('.card')];
-    let returnedValue = filter(value, filteredCards);
+    console.log(tasks);
+    let returnedValue = filter(value, filteredCards, tasks);
+    console.log(tasks);
     filteredCards = returnedValue == undefined ? filteredCards : returnedValue; 
     updateCount(tasksContainer, filteredCards.length)
     // console.log(filteredTasks);
@@ -116,6 +120,10 @@ function hide(e) {
     } else {
         checkSideMenu();
         arrow.style.pointerEvents = 'all';
+    }
+
+    if(e.target.classList.contains('close')) {
+        resetFilter();
     }
 }
 
