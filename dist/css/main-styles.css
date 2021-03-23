@@ -160,10 +160,30 @@
   font-size: 1.5rem;
   text-transform: uppercase;
   color: black;
+  position: relative;
+}
+.content__tasks .filter-header .close {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background-image: url(../static/clear.png);
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+.content__tasks .filter-header .close:hover {
+  filter: contrast(200%);
 }
 .content__tasks .filter-header .count {
   font-size: 1rem;
   margin: 0 3px;
+}
+.content__tasks .filter-header .ascendant,
+.content__tasks .filter-header .descendant {
+  background-color: white;
 }
 .content__tasks .filter-header .work {
   background-color: #ff5722;
@@ -200,7 +220,9 @@
 .content__tasks .filter-header .not-important,
 .content__tasks .filter-header .urgent,
 .content__tasks .filter-header .done,
-.content__tasks .filter-header .pending {
+.content__tasks .filter-header .pending,
+.content__tasks .filter-header .ascendant,
+.content__tasks .filter-header .descendant {
   text-transform: capitalize;
   display: inline-block;
   padding: 1px 7px;
@@ -467,14 +489,16 @@ body .footer {
 .content__tasks .tables-container {
   height: 100%;
   padding: 0 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 .content__tasks .tables-container .card {
   background-color: white;
-  max-width: 1000px;
+  width: 80%;
   color: black;
   margin: 5px auto;
-  height: 110px;
+  max-height: 100px;
   padding: 5px 5px 25px 5px;
   display: flex;
   position: relative;
@@ -483,6 +507,8 @@ body .footer {
   backdrop-filter: blur(0.1rem);
   transition: height 1s ease;
   box-shadow: 0 0 2px  black;
+  flex-grow: 1;
+  transition: all 0.5s;
 }
 .content__tasks .tables-container .card:hover {
   box-shadow: 1px 1px 2px  black;
@@ -653,7 +679,7 @@ body .footer {
   font-weight: bolder;
 }
 .content__tasks .tables-container .card-grow {
-  height: 250px;
+  max-height: 250px;
 }
 * {
   margin: 0;
@@ -727,6 +753,7 @@ body .footer {
 .footer {
   border-top: solid black 1px;
   overflow: hidden;
+  padding-right: 25px;
 }
 .footer .logo h1 {
   font-family: 'Poppins';
@@ -758,5 +785,3 @@ body .footer {
   }
 }
 
-
-/*# sourceMappingURL=main-styles.css.map*/
