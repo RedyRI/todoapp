@@ -91,41 +91,46 @@
     letter-spacing: -1.5rem;
   }
 }
-.content__side .menu-container {
-  z-index: 5;
-}
-.content__side .menu-container ul {
-  list-style: none;
-  position: relative;
-}
-.content__side .menu-container ul li {
-  border-radius: 5px;
-  display: block;
-  background-color: white;
-  color: black;
-  padding: 2px 12px;
-  font-family: sans-serif;
-  font-size: 1rem;
-  border-bottom: solid black 1px;
-  cursor: pointer;
-}
-.content__side .menu-container ul li:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 5px black;
-}
-.content__side .menu-container ul li span {
-  float: right;
-  padding: 0px 5px;
-  margin-left: 5px;
-}
-.content__side .menu-container ul li span:hover {
-  background-color: black;
+.content__side .menu-container .menu {
   color: white;
-  font-weight: bolder;
-  border-radius: 50%;
+  list-style: none;
+  margin: 0;
+  text-transform: capitalize;
+  padding: 0;
 }
-.content__side .menu-container ul li:nth-child(1) {
-  border-top: 1px solid black;
+.content__side .menu-container .menu .menu-item .submenu-btn {
+  padding-left: 4px;
+  display: block;
+  border-bottom: 1px solid black;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+}
+.content__side .menu-container .menu .menu-item .submenu-btn .submenu-arrow {
+  transition: all 0.5s;
+  margin: 3px;
+  float: right;
+  color: black;
+  width: 18px;
+  height: 18px;
+  background-image: url(../static/down-arrow.png);
+  background-size: cover;
+  background-position: center;
+}
+.content__side .menu-container .menu .menu-item .submenu-btn .submenu-arrow:hover {
+  transform: scale(1.15);
+}
+.content__side .menu-container .menu .menu-item .submenu {
+  height: 0;
+  overflow-y: hidden;
+  transition: all 0.5s;
+}
+.content__side .menu-container .menu .menu-item .submenu .submenu-item {
+  cursor: pointer;
+  padding-left: 10px;
+  background-color: #474646;
+  margin: 2px 0;
 }
 .content .show {
   left: 0;
@@ -220,11 +225,13 @@ body {
 body .header {
   height: 75px;
   width: 100%;
+  background: linear-gradient(to right top, #f5db49, #f8863a);
 }
 body .content {
   flex: 1;
 }
 body .footer {
+  background: linear-gradient(to right top, #f5db49, #f8863a);
   height: 75px;
 }
 .content__tasks {
@@ -239,7 +246,6 @@ body .footer {
   overflow-y: auto;
 }
 .content__tasks .cards-container .card {
-  background-color: white;
   color: black;
   width: 23%;
   margin: 5px auto;
@@ -250,6 +256,7 @@ body .footer {
   flex-direction: column;
   box-shadow: 0 0 5px black;
   height: 225px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
 }
 .content__tasks .cards-container .card:hover {
   box-shadow: 0 0 8px  black;

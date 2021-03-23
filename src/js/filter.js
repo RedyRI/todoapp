@@ -1,19 +1,43 @@
-function filter(e) {
+function filter(tasks, value, cards) {
+  let filteredCards;
   let option;
-  let value = e.target.textContent;
-  console.log(value);
-  if(value == 'home' || value == 'shopping' || value == 'school' || value == 'work') {
+  let filteredTasks;
+  let val = value;
+  // let cards = [...field.querySelectorAll('.card')];
+  console.log(cards);
+
+  if(val == 'home' || val == 'shopping' || val == 'school' || val == 'work') {
     option = 'category'
-  } else if (value == 'not important' || value == 'important' || value == 'urgent') {
+  } else if (val == 'not important' || val == 'important' || val == 'urgent') {
     option = 'priority'
-  } else if(value == 'pending' || value == 'done'){
+  } else if(val == 'pending' || val == 'done'){
     option = 'done'
   } else {
     option = 'date'
   }
-  filterTasks = tasks.filter(item => item.option == value)
+
+  filteredCards = cards.filter(card => {
+    let cardOption = card.querySelector(`.${option}`);
+    console.log(cardOption);
+    console.log(cardOption.textContent);
+    if(cardOption.textContent != val) {
+      card.style.display = 'none'
+    } else {
+      card.style.display = 'flex'
+    }
+    return cardOption.textContent == val
+  })
   console.log(filteredCards);
+
+  val = value == 'done' ? true :
+  filteredTasks = tasks.filter(item => item[option] == val)
+  value == 'pending' ? false : value;
+  console.log(tasks);
   return filteredCards;
+}
+
+function filterCards(field, cards, filteredTasks) {
+
 }
 
 

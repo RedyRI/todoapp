@@ -1177,6 +1177,39 @@ function getUTCDayOfYear(dirtyDate) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getUTCISOWeek)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _startOfUTCISOWeek_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../startOfUTCISOWeek/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js");
+/* harmony import */ var _startOfUTCISOWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../startOfUTCISOWeekYear/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js");
+/* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
+
+
+
+var MILLISECONDS_IN_WEEK = 604800000; // This function will be a part of public API when UTC function will be implemented.
+// See issue: https://github.com/date-fns/date-fns/issues/376
+
+function getUTCISOWeek(dirtyDate) {
+  (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
+  var diff = (0,_startOfUTCISOWeek_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(date).getTime() - (0,_startOfUTCISOWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(date).getTime(); // Round the number of days to the nearest integer
+  // because the number of milliseconds in a week is not constant
+  // (e.g. it's different in the week of the daylight saving time clock shift)
+
+  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
+}
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/esm/_lib/getUTCISOWeekYear/index.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/date-fns/esm/_lib/getUTCISOWeekYear/index.js ***!
@@ -1219,19 +1252,19 @@ function getUTCISOWeekYear(dirtyDate) {
 
 /***/ }),
 
-/***/ "./node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js ***!
-  \***************************************************************/
+/***/ "./node_modules/date-fns/esm/_lib/getUTCWeek/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/date-fns/esm/_lib/getUTCWeek/index.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getUTCISOWeek)
+/* harmony export */   "default": () => (/* binding */ getUTCWeek)
 /* harmony export */ });
 /* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
-/* harmony import */ var _startOfUTCISOWeek_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../startOfUTCISOWeek/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js");
-/* harmony import */ var _startOfUTCISOWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../startOfUTCISOWeekYear/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js");
+/* harmony import */ var _startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../startOfUTCWeek/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js");
+/* harmony import */ var _startOfUTCWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../startOfUTCWeekYear/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCWeekYear/index.js");
 /* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
 
 
@@ -1240,10 +1273,10 @@ __webpack_require__.r(__webpack_exports__);
 var MILLISECONDS_IN_WEEK = 604800000; // This function will be a part of public API when UTC function will be implemented.
 // See issue: https://github.com/date-fns/date-fns/issues/376
 
-function getUTCISOWeek(dirtyDate) {
+function getUTCWeek(dirtyDate, options) {
   (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
   var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
-  var diff = (0,_startOfUTCISOWeek_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(date).getTime() - (0,_startOfUTCISOWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(date).getTime(); // Round the number of days to the nearest integer
+  var diff = (0,_startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(date, options).getTime() - (0,_startOfUTCWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(date, options).getTime(); // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
 
@@ -1306,39 +1339,6 @@ function getUTCWeekYear(dirtyDate, dirtyOptions) {
 
 /***/ }),
 
-/***/ "./node_modules/date-fns/esm/_lib/getUTCWeek/index.js":
-/*!************************************************************!*\
-  !*** ./node_modules/date-fns/esm/_lib/getUTCWeek/index.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getUTCWeek)
-/* harmony export */ });
-/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
-/* harmony import */ var _startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../startOfUTCWeek/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js");
-/* harmony import */ var _startOfUTCWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../startOfUTCWeekYear/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCWeekYear/index.js");
-/* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
-
-
-
-
-var MILLISECONDS_IN_WEEK = 604800000; // This function will be a part of public API when UTC function will be implemented.
-// See issue: https://github.com/date-fns/date-fns/issues/376
-
-function getUTCWeek(dirtyDate, options) {
-  (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
-  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
-  var diff = (0,_startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(date, options).getTime() - (0,_startOfUTCWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(date, options).getTime(); // Round the number of days to the nearest integer
-  // because the number of milliseconds in a week is not constant
-  // (e.g. it's different in the week of the daylight saving time clock shift)
-
-  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
-}
-
-/***/ }),
-
 /***/ "./node_modules/date-fns/esm/_lib/protectedTokens/index.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/date-fns/esm/_lib/protectedTokens/index.js ***!
@@ -1391,6 +1391,35 @@ function requiredArgs(required, args) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ startOfUTCISOWeek)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
+ // This function will be a part of public API when UTC function will be implemented.
+// See issue: https://github.com/date-fns/date-fns/issues/376
+
+function startOfUTCISOWeek(dirtyDate) {
+  (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
+  var weekStartsOn = 1;
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
+  var day = date.getUTCDay();
+  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+  date.setUTCDate(date.getUTCDate() - diff);
+  date.setUTCHours(0, 0, 0, 0);
+  return date;
+}
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js ***!
@@ -1421,26 +1450,37 @@ function startOfUTCISOWeekYear(dirtyDate) {
 
 /***/ }),
 
-/***/ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js ***!
-  \*******************************************************************/
+/***/ "./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js ***!
+  \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ startOfUTCISOWeek)
+/* harmony export */   "default": () => (/* binding */ startOfUTCWeek)
 /* harmony export */ });
-/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toInteger/index.js */ "./node_modules/date-fns/esm/_lib/toInteger/index.js");
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
 /* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
 
  // This function will be a part of public API when UTC function will be implemented.
 // See issue: https://github.com/date-fns/date-fns/issues/376
 
-function startOfUTCISOWeek(dirtyDate) {
+function startOfUTCWeek(dirtyDate, dirtyOptions) {
   (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
-  var weekStartsOn = 1;
-  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
+  var options = dirtyOptions || {};
+  var locale = options.locale;
+  var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
+  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : (0,_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : (0,_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+
+  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
+  }
+
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(dirtyDate);
   var day = date.getUTCDay();
   var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
   date.setUTCDate(date.getUTCDate() - diff);
@@ -1482,46 +1522,6 @@ function startOfUTCWeekYear(dirtyDate, dirtyOptions) {
   firstWeek.setUTCFullYear(year, 0, firstWeekContainsDate);
   firstWeek.setUTCHours(0, 0, 0, 0);
   var date = (0,_startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(firstWeek, dirtyOptions);
-  return date;
-}
-
-/***/ }),
-
-/***/ "./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ startOfUTCWeek)
-/* harmony export */ });
-/* harmony import */ var _toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toInteger/index.js */ "./node_modules/date-fns/esm/_lib/toInteger/index.js");
-/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
-/* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
-
-
- // This function will be a part of public API when UTC function will be implemented.
-// See issue: https://github.com/date-fns/date-fns/issues/376
-
-function startOfUTCWeek(dirtyDate, dirtyOptions) {
-  (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
-  var options = dirtyOptions || {};
-  var locale = options.locale;
-  var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
-  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : (0,_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(localeWeekStartsOn);
-  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : (0,_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
-
-  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
-    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
-  }
-
-  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(dirtyDate);
-  var day = date.getUTCDay();
-  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-  date.setUTCDate(date.getUTCDate() - diff);
-  date.setUTCHours(0, 0, 0, 0);
   return date;
 }
 
@@ -2976,6 +2976,40 @@ function createForm(title, btn, type) {
 
 /***/ }),
 
+/***/ "./src/js/filter.js":
+/*!**************************!*\
+  !*** ./src/js/filter.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "filter": () => (/* binding */ filter)
+/* harmony export */ });
+function filter(e) {
+  let option;
+  let value = e.target.textContent;
+  console.log(value);
+  if(value == 'home' || value == 'shopping' || value == 'school' || value == 'work') {
+    option = 'category'
+  } else if (value == 'not important' || value == 'important' || value == 'urgent') {
+    option = 'priority'
+  } else if(value == 'pending' || value == 'done'){
+    option = 'done'
+  } else {
+    option = 'date'
+  }
+  filterTasks = tasks.filter(item => item.option == value)
+  console.log(filteredCards);
+  return filteredCards;
+}
+
+
+
+
+
+/***/ }),
+
 /***/ "./src/js/idGen.js":
 /*!*************************!*\
   !*** ./src/js/idGen.js ***!
@@ -3110,35 +3144,39 @@ function fillCard(card, task, type) {
 
 /***/ }),
 
-/***/ "./src/js/sideMenu.js":
-/*!****************************!*\
-  !*** ./src/js/sideMenu.js ***!
-  \****************************/
+/***/ "./src/js/submenuTransition.js":
+/*!*************************************!*\
+  !*** ./src/js/submenuTransition.js ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "menuContainer": () => (/* binding */ menuContainer)
+/* harmony export */   "addMenuAnimation": () => (/* binding */ addMenuAnimation)
 /* harmony export */ });
-const menuContainer = document.createElement('div');
-menuContainer.classList.add('menu-container');
+const submenuBtn = document.querySelectorAll('.submenu-btn');
 
-let options = ['see all tasks', 'see the categories', 'see the remaining tasks']
+function addMenuAnimation () {
+  for (let i = 0; i < submenuBtn.length; i++) {
+    submenuBtn[i].addEventListener('click', (e) => {
+      const submenu = submenuBtn[i].nextElementSibling;
+      const arrow = submenuBtn[i].lastElementChild;
+      const alto = submenu.scrollHeight;
+      arrow.classList.toggle('.desplegar')
+      
+      if(submenu.classList.contains('desplegar')) {
+        submenu.classList.toggle('desplegar')
+        submenu.removeAttribute('style')
+        arrow.removeAttribute('style')
+      } else {
+        submenu.classList.toggle('desplegar')
+        submenu.style.height = alto + 'px';
+        arrow.style.transform = 'rotate(180deg)';
+      }
 
-function genrateLi(option) {
-    return `<li>${option}<span class="span"> + </span></li>`
+    })
+  }
 }
-
-function generateMenu(arr) {
-    let content = '<ul>'
-    for (let i = 0; i < arr.length; i++) {
-        content += genrateLi(arr[i]);
-    }
-    content += '</ul>';
-    return content
-}
-let menuContent = generateMenu(options);
-menuContainer.innerHTML = menuContent;
 
 
 
@@ -3301,35 +3339,40 @@ var __webpack_exports__ = {};
   !*** ./src/js/index.js ***!
   \*************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
-/* harmony import */ var _sideMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sideMenu */ "./src/js/sideMenu.js");
-/* harmony import */ var _addForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addForm */ "./src/js/addForm.js");
-/* harmony import */ var _less_index_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../less/index.less */ "./src/less/index.less");
-/* harmony import */ var _static_sheep_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../static/sheep.png */ "./src/static/sheep.png");
-/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./task */ "./src/js/task.js");
-/* harmony import */ var _makeCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./makeCard */ "./src/js/makeCard.js");
-
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var _addForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addForm */ "./src/js/addForm.js");
+/* harmony import */ var _less_index_less__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../less/index.less */ "./src/less/index.less");
+/* harmony import */ var _static_sheep_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../static/sheep.png */ "./src/static/sheep.png");
+/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./task */ "./src/js/task.js");
+/* harmony import */ var _makeCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./makeCard */ "./src/js/makeCard.js");
+/* harmony import */ var _submenuTransition__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./submenuTransition */ "./src/js/submenuTransition.js");
+/* harmony import */ var _filter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./filter */ "./src/js/filter.js");
 
  
 
 
 
 
+
+
+
+
 // initialize
+(0,_submenuTransition__WEBPACK_IMPORTED_MODULE_5__.addMenuAnimation)();
 const tasks = []
-const addFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_1__.createForm)('Add new Task', 'Add task', 'n')
+const addFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_0__.createForm)('Add new Task', 'Add task', 'n')
 addFormContainer.classList.add('add-form-container')
-const editFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_1__.createForm)('Edit task', 'save changes', 'e')
+const editFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_0__.createForm)('Edit task', 'save changes', 'e')
 editFormContainer.classList.add('edit-form-container')
 const cardsContainer = document.createElement('div')
 cardsContainer.classList.add('cards-container')
 
 //  constructor(title, priority, description, category)
-let t1 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
-let t2 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 2', 'important', 'this is the task number two', 'work', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
-let t3 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 3', 'not important', 'this is the task number three', 'school', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
-let t4 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 4', 'important', 'this is the task number four', 'shopping', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
-let t5 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 5', 'urgent', 'this is the task number five', 'work', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
+let t1 = new _task__WEBPACK_IMPORTED_MODULE_3__.Task('task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_7__.default)(new Date(), 'yyyy-MM-dd')}`)
+let t2 = new _task__WEBPACK_IMPORTED_MODULE_3__.Task('task 2', 'important', 'this is the task number two', 'work', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_7__.default)(new Date(), 'yyyy-MM-dd')}`)
+let t3 = new _task__WEBPACK_IMPORTED_MODULE_3__.Task('task 3', 'not important', 'this is the task number three', 'school', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_7__.default)(new Date(), 'yyyy-MM-dd')}`)
+let t4 = new _task__WEBPACK_IMPORTED_MODULE_3__.Task('task 4', 'important', 'this is the task number four', 'shopping', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_7__.default)(new Date(), 'yyyy-MM-dd')}`)
+let t5 = new _task__WEBPACK_IMPORTED_MODULE_3__.Task('task 5', 'urgent', 'this is the task number five', 'work', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_7__.default)(new Date(), 'yyyy-MM-dd')}`)
 
 // cacheDOM
 const header = document.querySelector('.header')
@@ -3343,6 +3386,7 @@ const formBtn = addFormContainer.querySelector('#n')
 const saveChangsBtn = editFormContainer.querySelector('#e');
 const cancelForm = addFormContainer.querySelector('.cancel')
 const cancelEditForm = editFormContainer.querySelector('.cancel')
+const submenuItems = [...document.querySelectorAll('.submenu-item')]
 
 tasks.push(t1)
 tasks.push(t2)
@@ -3363,9 +3407,9 @@ arrow.addEventListener('click', showMenu);
 tasksContainer.addEventListener('click', deleteOrUpdateCard);
 saveChangsBtn.addEventListener('click', edit)
 mode.addEventListener('change', checkMode)
+submenuItems.forEach(item => { item.addEventListener('click', _filter__WEBPACK_IMPORTED_MODULE_6__.filter) })
 
 // render the initial content
-menuContainer.appendChild(_sideMenu__WEBPACK_IMPORTED_MODULE_0__.menuContainer)
 tasksContainer.appendChild(addFormContainer)
 tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)
@@ -3394,8 +3438,8 @@ function hide(e) {
 
 function showForm(e) {
     addFormContainer.style.display = 'flex';
-    addFormContainer.querySelector('.form-date').setAttribute('value', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
-    addFormContainer.querySelector('.form-date').setAttribute('min', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
+    addFormContainer.querySelector('.form-date').setAttribute('value', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_7__.default)(new Date(), 'yyyy-MM-dd')}`)
+    addFormContainer.querySelector('.form-date').setAttribute('min', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_7__.default)(new Date(), 'yyyy-MM-dd')}`)
     checkSideMenu();
 }
 
@@ -3423,8 +3467,8 @@ function addTask(e) {
 // }
 
 function renderAsCards(task) {
-    let card = (0,_makeCard__WEBPACK_IMPORTED_MODULE_5__.createCard)();
-    (0,_makeCard__WEBPACK_IMPORTED_MODULE_5__.fillCard)(card, task, 'new')
+    let card = (0,_makeCard__WEBPACK_IMPORTED_MODULE_4__.createCard)();
+    (0,_makeCard__WEBPACK_IMPORTED_MODULE_4__.fillCard)(card, task, 'new')
     cardsContainer.appendChild(card)
 }
 
@@ -3491,7 +3535,7 @@ function showEditForm() {
     editFormContainer.querySelector('#ecategory').value = t.category
     editFormContainer.querySelector('#edescription').value = t.description
     editFormContainer.querySelector('#edate').value = t.date
-    editFormContainer.querySelector('#edate').setAttribute('min', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
+    editFormContainer.querySelector('#edate').setAttribute('min', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_7__.default)(new Date(), 'yyyy-MM-dd')}`)
 
     editFormContainer.style.display = 'flex';
 }
@@ -3510,7 +3554,7 @@ function editTask(editedTask) {
             }
         }
     }
-    (0,_makeCard__WEBPACK_IMPORTED_MODULE_5__.fillCard)(cardToEdit, t, 'edit')
+    (0,_makeCard__WEBPACK_IMPORTED_MODULE_4__.fillCard)(cardToEdit, t, 'edit')
 }
 
 
@@ -3533,7 +3577,7 @@ function getTask(e) {
     }
 
     if(allOk) {
-        let t = new _task__WEBPACK_IMPORTED_MODULE_4__.Task(task.title, task.priority, task.description, task.category, task.date)
+        let t = new _task__WEBPACK_IMPORTED_MODULE_3__.Task(task.title, task.priority, task.description, task.category, task.date)
         arrow.style.pointerEvents = 'all';
         resetForm(form)
         return t

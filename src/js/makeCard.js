@@ -26,6 +26,7 @@ function createCard() {
     btnStatus.classList.add('s')
     const textStatus = document.createElement('span')
     textStatus.classList.add('s')
+    textStatus.classList.add('done')
     textStatus.textContent = 'pending'
     const date = document.createElement('div')
     date.classList.add('date')

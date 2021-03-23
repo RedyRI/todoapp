@@ -5,12 +5,12 @@ import '../static/sheep.png';
 import { Task } from './task';
 import { createCard, fillCard } from './makeCard'
 import { addMenuAnimation } from './submenuTransition'
-import { startFilter } from './filter'
 import { filter } from './filter'
 
 // initialize
 addMenuAnimation();
 const tasks = []
+let filteredCards = []
 const addFormContainer = createForm('Add new Task', 'Add task', 'n')
 addFormContainer.classList.add('add-form-container')
 const editFormContainer = createForm('Edit task', 'save changes', 'e')
@@ -38,6 +38,7 @@ const saveChangsBtn = editFormContainer.querySelector('#e');
 const cancelForm = addFormContainer.querySelector('.cancel')
 const cancelEditForm = editFormContainer.querySelector('.cancel')
 const submenuItems = [...document.querySelectorAll('.submenu-item')]
+const resetFiltertn = menuContainer.querySelector('.reset-filter')
 
 tasks.push(t1)
 tasks.push(t2)
@@ -58,7 +59,8 @@ arrow.addEventListener('click', showMenu);
 tasksContainer.addEventListener('click', deleteOrUpdateCard);
 saveChangsBtn.addEventListener('click', edit)
 mode.addEventListener('change', checkMode)
-submenuItems.forEach(item => { item.addEventListener('click', filter) })
+submenuItems.forEach(item => { item.addEventListener('click', startFilter) })
+resetFiltertn.addEventListener('click', resetFilter)
 
 // render the initial content
 tasksContainer.appendChild(addFormContainer)
@@ -66,10 +68,29 @@ tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)
 
 // functions 
+function resetFilter(e) {
+    let cards = [...cardsContainer.querySelectorAll('.card')]
+    cards.forEach(card => {
+        card.style.display = 'flex'
+    })
+    filteredCards = []
+}
+
+function startFilter(e) {
+    if(filteredCards.length == 0) {
+        filteredCards = [...cardsContainer.querySelectorAll('.card')];
+    }
+    let value = e.target.textContent;
+    // let cards = [...cardsContainer.querySelectorAll('.card')];
+    filteredCards = filter(tasks, value, filteredCards)
+    // console.log(filteredTasks);
+}
 
 function checkMode(e) {
     cardsContainer.classList.toggle('cards-container')
     cardsContainer.classList.toggle('tables-container')
+    checkSideMenu();
+    arrow.style.pointerEvents = 'all';
 }
 
 function showMenu(e) {
@@ -78,12 +99,19 @@ function showMenu(e) {
 }
 
 function hide(e) {
-    if(e.target.classList.contains('form-container') || e.target == cancelForm || e.target == cancelEditForm) {
+    let targetClasslist = e.target.classList;
+    if(targetClasslist.contains('form-container') || e.target == cancelForm || e.target == cancelEditForm) {
         addFormContainer.style.display = 'none'
         editFormContainer.style.display = 'none'
         arrow.style.pointerEvents = 'all';
         cancelEdit();
         resetForm(tasksContainer)
+    }
+
+    if(targetClasslist.contains('content__side') || targetClasslist.contains('submenu-btn') || targetClasslist.contains('submenu-item') || targetClasslist.contains('arrow') || targetClasslist.contains('submenu-arrow' || targetClasslist.contains('menu')) || targetClasslist.contains('submenu')) {
+    } else {
+        checkSideMenu();
+        arrow.style.pointerEvents = 'all';
     }
 }
 
@@ -243,5 +271,5 @@ function resetForm(form) {
     info[0].value = ''
     info[1].value = 'urgent'
     info[2].value = 'work'
-    info[3].value = ''
+    info[3].value = '';
 }
