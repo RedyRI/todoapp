@@ -1,11 +1,15 @@
 import { compareAsc,compareDesc, format } from 'date-fns'
-import { menuContainer as sideMenu } from './sideMenu';
 import { createForm } from './addForm'; 
 import '../less/index.less';
 import '../static/sheep.png';
 import { Task } from './task';
 import { createCard, fillCard } from './makeCard'
+import { addMenuAnimation } from './submenuTransition'
+import { startFilter } from './filter'
+import { filter } from './filter'
+
 // initialize
+addMenuAnimation();
 const tasks = []
 const addFormContainer = createForm('Add new Task', 'Add task', 'n')
 addFormContainer.classList.add('add-form-container')
@@ -33,6 +37,7 @@ const formBtn = addFormContainer.querySelector('#n')
 const saveChangsBtn = editFormContainer.querySelector('#e');
 const cancelForm = addFormContainer.querySelector('.cancel')
 const cancelEditForm = editFormContainer.querySelector('.cancel')
+const submenuItems = [...document.querySelectorAll('.submenu-item')]
 
 tasks.push(t1)
 tasks.push(t2)
@@ -53,9 +58,9 @@ arrow.addEventListener('click', showMenu);
 tasksContainer.addEventListener('click', deleteOrUpdateCard);
 saveChangsBtn.addEventListener('click', edit)
 mode.addEventListener('change', checkMode)
+submenuItems.forEach(item => { item.addEventListener('click', filter) })
 
 // render the initial content
-menuContainer.appendChild(sideMenu)
 tasksContainer.appendChild(addFormContainer)
 tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)

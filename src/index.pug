@@ -18,7 +18,36 @@ html
                     .wave
                     .image
         .content
-            .content__side 
+            .content__side
+                .menu-container
+                    ul(class='menu')
+                        li(class='menu-item') 
+                            a(href="#" class='submenu-btn')  filter by category
+                                span(class='submenu-arrow')
+                            ul(class='submenu')
+                                li(class='submenu-item') work
+                                li(class='submenu-item') home
+                                li(class='submenu-item') school 
+                                li(class='submenu-item') shooping
+                        li(class='menu-item') 
+                            a(href="#" class='submenu-btn') filter by priority
+                                span(class='submenu-arrow')
+                            ul(class="submenu")
+                                li(class='submenu-item') urgent 
+                                li(class='submenu-item') important 
+                                li(class='submenu-item') not important
+                        li(class='menu-item') 
+                            a(href="#" class='submenu-btn')  filter by done/pending
+                                span(class='submenu-arrow')
+                            ul(class='submenu')
+                                li(class='submenu-item') done 
+                                li(class='submenu-item') pending
+                        li(class='menu-item') 
+                            a(href="#" class='submenu-btn')  order by date
+                                span(class='submenu-arrow')
+                            ul(class="submenu")
+                                li(class='submenu-item') ascendant 
+                                li(class='submenu-item') descendant
                 .arrow >> 
             .content__tasks
         .footer 

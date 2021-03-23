@@ -2932,7 +2932,9 @@ function createForm(title, btn, type) {
   cancel.textContent = 'x'
   let form = document.createElement('form');
   form.classList.add('form');
-  
+
+  let date = type == 'n' ? 'Choose': 'Edit';
+
   let formContent = `
   <label for="${type}title">Task title:</label>
   <input class="info form-title" placeholder="My task..." type="text" id="${type}title" name="title">
@@ -2951,6 +2953,7 @@ function createForm(title, btn, type) {
   </select>
   <label for="${type}description">Task description: </label>
   <textarea class="info form-description" placeholder="Describe your task..." id="${type}description" name="description" rows="4" cols="50"></textarea>
+  <label for="${type}date">${date} the date: </label>
   <input class="info form-date" type="date" value="" id="${type}date" name="date" autocomplete>
   <input type="submit" value="${btn}" id="${type}">
   `
@@ -3314,15 +3317,15 @@ __webpack_require__.r(__webpack_exports__);
 
 // initialize
 const tasks = []
-const addFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_1__.createForm)('Add new Task', 'submit', 'n')
+const addFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_1__.createForm)('Add new Task', 'Add task', 'n')
 addFormContainer.classList.add('add-form-container')
 const editFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_1__.createForm)('Edit task', 'save changes', 'e')
 editFormContainer.classList.add('edit-form-container')
 const cardsContainer = document.createElement('div')
-cardsContainer.classList.add('tables-container')
+cardsContainer.classList.add('cards-container')
 
 //  constructor(title, priority, description, category)
-let t1 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task1task1task1task1task1task1task1task1task1task1task1task1task1task1task1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
+let t1 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
 let t2 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 2', 'important', 'this is the task number two', 'work', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
 let t3 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 3', 'not important', 'this is the task number three', 'school', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
 let t4 = new _task__WEBPACK_IMPORTED_MODULE_4__.Task('task 4', 'important', 'this is the task number four', 'shopping', `${(0,date_fns__WEBPACK_IMPORTED_MODULE_6__.default)(new Date(), 'yyyy-MM-dd')}`)
@@ -3439,6 +3442,7 @@ function deleteOrUpdateCard(e) {
     } else if (e.target.classList.contains('expand-btn')) {
         console.log('asd');
         console.log(e.target.previousSibling.previousSibling);
+        e.target.parentNode.classList.toggle('card-grow')
         e.target.previousSibling.previousSibling.classList.toggle('show-description-container')
     }
 }
