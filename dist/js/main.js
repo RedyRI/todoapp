@@ -2986,22 +2986,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "filter": () => (/* binding */ filter)
 /* harmony export */ });
-function filter(e) {
+function filter(tasks, value, cards) {
+  let filteredCards;
   let option;
-  let value = e.target.textContent;
-  console.log(value);
-  if(value == 'home' || value == 'shopping' || value == 'school' || value == 'work') {
+  let filteredTasks;
+  let val = value;
+  // let cards = [...field.querySelectorAll('.card')];
+  console.log(cards);
+
+  if(val == 'home' || val == 'shopping' || val == 'school' || val == 'work') {
     option = 'category'
-  } else if (value == 'not important' || value == 'important' || value == 'urgent') {
+  } else if (val == 'not important' || val == 'important' || val == 'urgent') {
     option = 'priority'
-  } else if(value == 'pending' || value == 'done'){
+  } else if(val == 'pending' || val == 'done'){
     option = 'done'
   } else {
     option = 'date'
   }
-  filterTasks = tasks.filter(item => item.option == value)
+
+  filteredCards = cards.filter(card => {
+    let cardOption = card.querySelector(`.${option}`);
+    console.log(cardOption);
+    console.log(cardOption.textContent);
+    if(cardOption.textContent != val) {
+      card.style.display = 'none'
+    } else {
+      card.style.display = 'flex'
+    }
+    return cardOption.textContent == val
+  })
   console.log(filteredCards);
+
+  val = value == 'done' ? true :
+  filteredTasks = tasks.filter(item => item[option] == val)
+  value == 'pending' ? false : value;
+  console.log(tasks);
   return filteredCards;
+}
+
+function filterCards(field, cards, filteredTasks) {
+
 }
 
 
@@ -3070,6 +3094,7 @@ function createCard() {
     btnStatus.classList.add('s')
     const textStatus = document.createElement('span')
     textStatus.classList.add('s')
+    textStatus.classList.add('done')
     textStatus.textContent = 'pending'
     const date = document.createElement('div')
     date.classList.add('date')
@@ -3154,16 +3179,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addMenuAnimation": () => (/* binding */ addMenuAnimation)
 /* harmony export */ });
-const submenuBtn = document.querySelectorAll('.submenu-btn');
+const submenuBtns = [...document.querySelectorAll('.submenu-btn')];
 
 function addMenuAnimation () {
-  for (let i = 0; i < submenuBtn.length; i++) {
-    submenuBtn[i].addEventListener('click', (e) => {
-      const submenu = submenuBtn[i].nextElementSibling;
-      const arrow = submenuBtn[i].lastElementChild;
-      const alto = submenu.scrollHeight;
-      arrow.classList.toggle('.desplegar')
-      
+  submenuBtns.forEach(btn => {
+    btn.addEventListener('click', showAndHide)
+  })
+}
+
+function showAndHide(e) {
+  for (let btn of submenuBtns) {
+    const submenu = btn.nextElementSibling;
+    const arrow = btn.lastElementChild;
+    const alto = submenu.scrollHeight;
+    if(btn == e.target || e.target == arrow) {
       if(submenu.classList.contains('desplegar')) {
         submenu.classList.toggle('desplegar')
         submenu.removeAttribute('style')
@@ -3173,10 +3202,16 @@ function addMenuAnimation () {
         submenu.style.height = alto + 'px';
         arrow.style.transform = 'rotate(180deg)';
       }
-
-    })
+    } else {
+      if(submenu.classList.contains('desplegar')) {
+        submenu.classList.toggle('desplegar')
+        submenu.removeAttribute('style')
+        arrow.removeAttribute('style')
+      }
+    }
   }
 }
+
 
 
 
@@ -3356,10 +3391,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 // initialize
 (0,_submenuTransition__WEBPACK_IMPORTED_MODULE_5__.addMenuAnimation)();
 const tasks = []
+let filteredCards = []
 const addFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_0__.createForm)('Add new Task', 'Add task', 'n')
 addFormContainer.classList.add('add-form-container')
 const editFormContainer = (0,_addForm__WEBPACK_IMPORTED_MODULE_0__.createForm)('Edit task', 'save changes', 'e')
@@ -3387,6 +3422,7 @@ const saveChangsBtn = editFormContainer.querySelector('#e');
 const cancelForm = addFormContainer.querySelector('.cancel')
 const cancelEditForm = editFormContainer.querySelector('.cancel')
 const submenuItems = [...document.querySelectorAll('.submenu-item')]
+const resetFiltertn = menuContainer.querySelector('.reset-filter')
 
 tasks.push(t1)
 tasks.push(t2)
@@ -3407,7 +3443,8 @@ arrow.addEventListener('click', showMenu);
 tasksContainer.addEventListener('click', deleteOrUpdateCard);
 saveChangsBtn.addEventListener('click', edit)
 mode.addEventListener('change', checkMode)
-submenuItems.forEach(item => { item.addEventListener('click', _filter__WEBPACK_IMPORTED_MODULE_6__.filter) })
+submenuItems.forEach(item => { item.addEventListener('click', startFilter) })
+resetFiltertn.addEventListener('click', resetFilter)
 
 // render the initial content
 tasksContainer.appendChild(addFormContainer)
@@ -3415,10 +3452,29 @@ tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)
 
 // functions 
+function resetFilter(e) {
+    let cards = [...cardsContainer.querySelectorAll('.card')]
+    cards.forEach(card => {
+        card.style.display = 'flex'
+    })
+    filteredCards = []
+}
+
+function startFilter(e) {
+    if(filteredCards.length == 0) {
+        filteredCards = [...cardsContainer.querySelectorAll('.card')];
+    }
+    let value = e.target.textContent;
+    // let cards = [...cardsContainer.querySelectorAll('.card')];
+    filteredCards = (0,_filter__WEBPACK_IMPORTED_MODULE_6__.filter)(tasks, value, filteredCards)
+    // console.log(filteredTasks);
+}
 
 function checkMode(e) {
     cardsContainer.classList.toggle('cards-container')
     cardsContainer.classList.toggle('tables-container')
+    checkSideMenu();
+    arrow.style.pointerEvents = 'all';
 }
 
 function showMenu(e) {
@@ -3427,12 +3483,19 @@ function showMenu(e) {
 }
 
 function hide(e) {
-    if(e.target.classList.contains('form-container') || e.target == cancelForm || e.target == cancelEditForm) {
+    let targetClasslist = e.target.classList;
+    if(targetClasslist.contains('form-container') || e.target == cancelForm || e.target == cancelEditForm) {
         addFormContainer.style.display = 'none'
         editFormContainer.style.display = 'none'
         arrow.style.pointerEvents = 'all';
         cancelEdit();
         resetForm(tasksContainer)
+    }
+
+    if(targetClasslist.contains('content__side') || targetClasslist.contains('submenu-btn') || targetClasslist.contains('submenu-item') || targetClasslist.contains('arrow') || targetClasslist.contains('submenu-arrow' || 0) || targetClasslist.contains('submenu')) {
+    } else {
+        checkSideMenu();
+        arrow.style.pointerEvents = 'all';
     }
 }
 
@@ -3592,7 +3655,7 @@ function resetForm(form) {
     info[0].value = ''
     info[1].value = 'urgent'
     info[2].value = 'work'
-    info[3].value = ''
+    info[3].value = '';
 }
 
 })();

@@ -5,12 +5,12 @@ import '../static/sheep.png';
 import { Task } from './task';
 import { createCard, fillCard } from './makeCard'
 import { addMenuAnimation } from './submenuTransition'
-import { filter } from './filter'
+import { filter, addFilterLabel, removeFilterLabel, updateCount } from './filter'
 
 // initialize
 addMenuAnimation();
 const tasks = []
-let filteredCards = []
+let filteredCards = ['start']
 const addFormContainer = createForm('Add new Task', 'Add task', 'n')
 addFormContainer.classList.add('add-form-container')
 const editFormContainer = createForm('Edit task', 'save changes', 'e')
@@ -73,16 +73,20 @@ function resetFilter(e) {
     cards.forEach(card => {
         card.style.display = 'flex'
     })
-    filteredCards = []
+    filteredCards = ['start'];
+    removeFilterLabel(tasksContainer);
 }
-
 function startFilter(e) {
-    if(filteredCards.length == 0) {
+    console.log(typeof(e) == 'string');
+    let value = e.target.textContent;
+    addFilterLabel(tasksContainer, cardsContainer, value)
+    if(filteredCards.indexOf('start') == 0) {
         filteredCards = [...cardsContainer.querySelectorAll('.card')];
     }
-    let value = e.target.textContent;
     // let cards = [...cardsContainer.querySelectorAll('.card')];
-    filteredCards = filter(tasks, value, filteredCards)
+    let returnedValue = filter(value, filteredCards);
+    filteredCards = returnedValue == undefined ? filteredCards : returnedValue; 
+    updateCount(tasksContainer, filteredCards.length)
     // console.log(filteredTasks);
 }
 
@@ -137,6 +141,7 @@ function addTask(e) {
         addFormContainer.style.display = 'none';
         tasks.push(task)
         renderAsCards(task)
+        resetFilter();
     }
 }
 
