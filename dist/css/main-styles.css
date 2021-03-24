@@ -241,6 +241,7 @@
   display: none;
   flex-direction: column;
   align-items: center;
+  font-size: 1rem;
   padding-top: 20px;
 }
 .content__tasks .form-container h2 {
@@ -850,8 +851,16 @@ body .footer p {
   body .content__side .arrow {
     bottom: 95%;
   }
-  body .content__side .form-container .form {
+  body .content__tasks .form-container form {
     width: 98%;
+  }
+  body .content__tasks .form-container form label:not(label[class=desc]) {
+    display: inline-block;
+  }
+  body .content__tasks .form-container form select[name=category],
+  body .content__tasks .form-container form select[name=priority] {
+    display: inline-block;
+    width: auto;
   }
   body .footer {
     height: auto;
@@ -876,5 +885,3 @@ body .footer p {
   }
 }
 
-
-/*# sourceMappingURL=main-styles.css.map*/

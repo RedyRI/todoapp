@@ -3,14 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/js/index.js',
     output: {
         path: path.resolve(__dirname , 'dist'),
         filename: 'js/main.js',
         assetModuleFilename: 'static/[name][ext][query]',
     },
-    devtool: 'source-map',
+    // devtool: 'source-map',
 
     devServer: {
         port: 5000,

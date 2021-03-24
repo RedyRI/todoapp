@@ -22,13 +22,6 @@ editFormContainer.classList.add('edit-form-container')
 const cardsContainer = document.createElement('div')
 cardsContainer.classList.add('cards-container')
 
-//  constructor(title, priority, description, category)
-let t1 = new Task(setTaskId(),'task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `2022-05-22`)
-let t2 = new Task(setTaskId(),'task 1',  'important', 'this is the task number two', 'work', `2020-11-10`)
-let t3 = new Task(setTaskId(),'task 1',  'not important', 'this is the task number three', 'school', `2019-10-10`)
-let t4 = new Task(setTaskId(), 'task 1', 'important', 'this is the task number four', 'shopping', `2022-01-10`)
-let t5 = new Task(setTaskId(), 'task 1',  'urgent', 'this is the task number five', 'work', '2021-12-11')
-// ${format(new Date(), 'yyyy-MM-dd')} ** a way to format the date
 // cacheDOM
 const header = document.querySelector('.header')
 const addBtn = header.querySelector('.add');
@@ -44,20 +37,6 @@ const cancelEditForm = editFormContainer.querySelector('.cancel')
 const submenuItems = [...document.querySelectorAll('.submenu-item')]
 const resetFiltertn = menuContainer.querySelector('.reset-filter')
 const headerMenuItems = [...header.querySelectorAll('.header-menu-item')]
-
-// tasks.push(t1)
-// window.localStorage.setItem(t1.id, JSON.stringify(t1))
-// console.log(JSON.parse(window.localStorage.getItem('1')));
-// tasks.push(t2)
-// window.localStorage.setItem(t2.id, JSON.stringify(t2))
-// tasks.push(t3)
-// window.localStorage.setItem(t3.id, JSON.stringify(t3))
-// tasks.push(t4)
-// window.localStorage.setItem(t4.id, JSON.stringify(t4))
-// tasks.push(t5)
-// window.localStorage.setItem(t5.id, JSON.stringify(t5))
-
-
 
 // bind events
 window.addEventListener('click', hide);
@@ -328,6 +307,9 @@ function editTask(taskToEdit) {
             }
             if(key == 'edit') {
                 task[key] = false;
+            }
+            if(key == 'done') {
+                task[key] = true;
             }
 
         }
