@@ -636,7 +636,6 @@
     width: 98%;
   }
   .content__tasks .tables-container .card .card-status {
-    transition: all 0.5s;
     width: auto;
     align-items: center;
     justify-content: flex-start;
@@ -711,6 +710,7 @@
 .header__nav .add {
   width: 50px;
   height: 50px;
+  display: block;
   position: relative;
 }
 .header__nav .add .wave {
@@ -781,10 +781,32 @@ body .footer p {
     position: fixed;
     top: 10px;
     right: 10px;
-    z-index: 1000;
+    z-index: 11;
   }
   body .content {
-    min-height: -85vh;
+    min-height: 80vh;
+    overflow: visible;
+  }
+  body .content__side .arrow {
+    bottom: 90%;
+  }
+  body .content__tasks .form-container {
+    height: 150%;
+    padding-top: 0;
+  }
+  body .content__tasks .form-container .form {
+    margin: 0 auto;
+    width: 90%;
+  }
+  body .content__tasks .form-container .cancel {
+    width: 25px;
+    height: 25px;
+    top: 0;
+    right: 0;
+    font-size: 1rem;
+  }
+  body .content__tasks .tables-container {
+    overflow: visible;
   }
 }
 @media screen and (max-width: 588px) {
@@ -826,7 +848,10 @@ body .footer p {
     flex: auto;
   }
   body .content__side .arrow {
-    bottom: 90%;
+    bottom: 95%;
+  }
+  body .content__side .form-container .form {
+    width: 98%;
   }
   body .footer {
     height: auto;

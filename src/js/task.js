@@ -2,13 +2,14 @@ import { compareAsc,compareDesc, format } from 'date-fns'
 import { idGen } from './idGen'
 
 class Task {
-    constructor(title, priority, description, category,date) {
-        this.id = idGen();
+    constructor(id, title, priority, description, category,date) {
+        this.id = id;
         this.description = description;
         this.title = title;
         this.category = category;
         this.priority = priority;
         this.done = false;
+        this.edited = false;
         // this.date = format(new Date(), 'yyy/dd/MM HH:mm'); 
         this.date = date;
         this. edit = false;

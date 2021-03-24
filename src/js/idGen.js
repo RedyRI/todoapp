@@ -1,9 +1,6 @@
-const idGen = (function() {
-    let x = 0;
-    return (function() {
-        return ++x;
-    })
-})();
+const idGen = function(x) {
+    return x + 1;
+};
 
 export {
     idGen,

@@ -210,16 +210,26 @@ body {
                 .arrow {
                     bottom: 95%;
                 }
+            }
+            &__tasks {
                 .form-container {
-                    .form {
+                    form {
                         width: 98%;
+                        label:not(label[class=desc]) {
+                            display: inline-block;
+
+                        }
+                        select[name=category], select[name=priority] {
+                            display: inline-block;
+                            width: auto;
+                        }
                         // input[type=submit], input[type=text], textarea, label {
-                        //     display: block;
-                        // }
+                            //     display: block;
+                            // }
+                        }
                     }
                 }
             }
-        }
         .footer {
             height: auto;
         }

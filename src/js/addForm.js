@@ -26,7 +26,7 @@ function createForm(title, btn, type) {
   <option value="shopping">Shopping tasks</option>
   <option value="work">Work tasks</option>
   </select>
-  <label for="${type}description">Task description: </label>
+  <label for="${type}description" class='desc'>Task description: </label>
   <textarea class="info form-description" placeholder="Describe your task..." id="${type}description" name="description" rows="4" cols="50"></textarea>
   <label for="${type}date">${date} the date: </label>
   <input class="info form-date" type="date" value="" id="${type}date" name="date" autocomplete>

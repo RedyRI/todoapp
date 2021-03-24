@@ -11,6 +11,10 @@ import { filter, addFilterLabel, removeFilterLabel, updateCount, getOption } fro
 addMenuAnimation();
 const tasks = []
 let filteredCards = ['start']
+if(!window.localStorage.getItem('idCount')) {
+    window.localStorage.setItem('idCount', 0)
+}
+// var myStorage = window.localStorage;
 const addFormContainer = createForm('Add new Task', 'Add task', 'n')
 addFormContainer.classList.add('add-form-container')
 const editFormContainer = createForm('Edit task', 'save changes', 'e')
@@ -19,11 +23,11 @@ const cardsContainer = document.createElement('div')
 cardsContainer.classList.add('cards-container')
 
 //  constructor(title, priority, description, category)
-let t1 = new Task('task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `2022-05-22`)
-let t2 = new Task('task 2', 'important', 'this is the task number two', 'work', `2020-11-10`)
-let t3 = new Task('task 3', 'not important', 'this is the task number three', 'school', `2019-10-10`)
-let t4 = new Task('task 4', 'important', 'this is the task number four', 'shopping', `2022-01-10`)
-let t5 = new Task('task 5', 'urgent', 'this is the task number five', 'work', '2021-12-11')
+let t1 = new Task(setTaskId(),'task 1', 'urgent', 'this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one this is the task number one ', 'home', `2022-05-22`)
+let t2 = new Task(setTaskId(),'task 1',  'important', 'this is the task number two', 'work', `2020-11-10`)
+let t3 = new Task(setTaskId(),'task 1',  'not important', 'this is the task number three', 'school', `2019-10-10`)
+let t4 = new Task(setTaskId(), 'task 1', 'important', 'this is the task number four', 'shopping', `2022-01-10`)
+let t5 = new Task(setTaskId(), 'task 1',  'urgent', 'this is the task number five', 'work', '2021-12-11')
 // ${format(new Date(), 'yyyy-MM-dd')} ** a way to format the date
 // cacheDOM
 const header = document.querySelector('.header')
@@ -41,17 +45,19 @@ const submenuItems = [...document.querySelectorAll('.submenu-item')]
 const resetFiltertn = menuContainer.querySelector('.reset-filter')
 const headerMenuItems = [...header.querySelectorAll('.header-menu-item')]
 
-tasks.push(t1)
-tasks.push(t2)
-tasks.push(t3)
-tasks.push(t4)
-tasks.push(t5)
+// tasks.push(t1)
+// window.localStorage.setItem(t1.id, JSON.stringify(t1))
+// console.log(JSON.parse(window.localStorage.getItem('1')));
+// tasks.push(t2)
+// window.localStorage.setItem(t2.id, JSON.stringify(t2))
+// tasks.push(t3)
+// window.localStorage.setItem(t3.id, JSON.stringify(t3))
+// tasks.push(t4)
+// window.localStorage.setItem(t4.id, JSON.stringify(t4))
+// tasks.push(t5)
+// window.localStorage.setItem(t5.id, JSON.stringify(t5))
 
-tasks.forEach(task => {
-    renderAsCards(task)
-})
 
-console.log(tasks[0].date > tasks[2].date);
 
 // bind events
 window.addEventListener('click', hide);
@@ -64,7 +70,7 @@ saveChangsBtn.addEventListener('click', edit)
 mode.addEventListener('change', checkMode)
 submenuItems.forEach(item => { item.addEventListener('click', startFilter) })
 resetFiltertn.addEventListener('click', resetFilter)
-headerMenuItems.forEach(item => item.addEventListener('change', getValue))
+headerMenuItems.forEach(item => item.addEventListener('change', getMenuItemValue))
 
 // render the initial content
 tasksContainer.appendChild(addFormContainer)
@@ -72,8 +78,38 @@ tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)
 
 // functions
+function startApp(myStorage)  {
+    if(myStorage.length > 0) {
+        for(let key in myStorage) {
+            console.log(key);
+            if(!isNaN(key)) {
+                console.log(key);
+                let task = JSON.parse(window.localStorage.getItem(key))
+                tasks.push(task)
+                console.log(task);
+                renderAsCards(task)
+            }
+        }
+    }
+}
 
-function getValue(e) {
+startApp(window.localStorage);
+setInitialState(tasks)
+
+function getIdCount() {
+    return  +window.localStorage.getItem('idCount')
+}
+function setIdCount(id) {
+    window.localStorage.setItem('idCount', id)
+}
+function setTaskId() {
+    let id = getIdCount();
+    setIdCount(id + 1)
+    return id + 1
+
+}
+
+function getMenuItemValue(e) {
     let value = e.target.value;
     if(value != '-') {
         startFilter(value)
@@ -164,16 +200,23 @@ function addTask(e) {
     e.preventDefault();
     let task = getTask(e);
     if(task != undefined) {
+        console.log(task);
         addFormContainer.style.display = 'none';
         tasks.push(task)
         renderAsCards(task)
         resetFilter();
+        window.localStorage.setItem(task.id, JSON.stringify(task))
+        console.log(window.localStorage);
     }
 }
 
 function renderAsCards(task) {
     let card = createCard();
-    fillCard(card, task, 'new')
+    if(task.edited) {
+        fillCard(card, task, 'edit')
+    } else {
+        fillCard(card, task, 'new')
+    }
     cardsContainer.appendChild(card)
 }
 
@@ -214,6 +257,8 @@ function deleteCard(e) {
     console.log(e.target.parentNode);
     tasks.splice(tasks.findIndex(item => item.id == e.target.parentNode.getAttribute('data-id')),1)
     cardsContainer.removeChild(e.target.parentNode)
+    window.localStorage.removeItem(e.target.parentNode.getAttribute('data-id'))
+    console.log(window.localStorage);
 }
 
 function updateState(e) {
@@ -230,14 +275,26 @@ function updateState(e) {
         e.target.parentNode.firstElementChild.style.backgroundColor = 'rgb(196, 32, 32)'
         task.done = false;
     }
+    window.localStorage.setItem(task.id, JSON.stringify(task))
     console.log(tasks);
+}
+
+function setInitialState(tasks) {
+    let cards = [...cardsContainer.querySelectorAll('.card')]
+    tasks.forEach(item => {
+        if(item.done) {
+            let cardToRender = cards.find(card => card.getAttribute('data-id') == item.id)
+            cardToRender.querySelector('.status').firstElementChild.style.backgroundColor = 'rgb(0, 255, 0)';
+            cardToRender.querySelector('.status').lastElementChild.textContent = 'done';
+        }
+    })
 }
 
 function edit(e) {
     e.preventDefault();
-    let editedTask = getTask(e);
-    if (editedTask != undefined) {
-        editTask(editedTask);
+    let taskToEdit = getTask(e);
+    if (taskToEdit != undefined) {
+        editTask(taskToEdit);
     }
 }
 
@@ -257,21 +314,28 @@ function showEditForm() {
     editFormContainer.style.display = 'flex';
 }
 
-function editTask(editedTask) {
-    let t = tasks.find(item => item.edit == true)
+function editTask(taskToEdit) {
+    let task = tasks.find(item => item.edit == true)
+    console.log(task);
     let cards = [...tasksContainer.querySelectorAll('.card')];
-    let cardToEdit = cards.find(item => item.getAttribute('data-id') == t.id)
+    let cardToEdit = cards.find(item => item.getAttribute('data-id') == task.id)
     editFormContainer.style.display = 'none';
-    for (let k in editedTask) {
-        if(k != 'id') {
-            if(k != 'edit') {
-                t[k] = editedTask[k];
-            } else {
-                t[k] = false;
+    for (let key in task) {
+        if(key != 'id') {
+            task[key] = taskToEdit[key];
+            if(key == 'edited') {
+                task[key] = true
             }
+            if(key == 'edit') {
+                task[key] = false;
+            }
+
         }
     }
-    fillCard(cardToEdit, t, 'edit')
+    window.localStorage.removeItem(task.id)
+    fillCard(cardToEdit, task, 'edit')
+    window.localStorage.setItem(task.id, JSON.stringify(task))
+    console.log(tasks);
 }
 
 
@@ -294,12 +358,12 @@ function getTask(e) {
     }
 
     if(allOk) {
-        let t = new Task(task.title, task.priority, task.description, task.category, task.date)
+        let newTask = new Task(setTaskId(),task.title, task.priority, task.description, task.category, task.date)
         arrow.style.pointerEvents = 'all';
         resetForm(form)
         addBtn.style.display = 'block'
         arrow.style.display = 'flex'
-        return t
+        return newTask
     } else {
         info[0].value = task.title == undefined ? '': task.title; 
     }
