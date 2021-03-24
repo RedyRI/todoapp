@@ -71,7 +71,8 @@ tasksContainer.appendChild(addFormContainer)
 tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)
 
-// functions 
+// functions
+
 function getValue(e) {
     let value = e.target.value;
     if(value != '-') {
@@ -127,6 +128,8 @@ function hide(e) {
         arrow.style.pointerEvents = 'all';
         cancelEdit();
         resetForm(tasksContainer)
+        addBtn.style.display = 'block'
+        arrow.style.display = 'flex'
     }
 
     if(targetClasslist.contains('content__side') || targetClasslist.contains('submenu-btn') || targetClasslist.contains('submenu-item') || targetClasslist.contains('arrow') || targetClasslist.contains('submenu-arrow' || targetClasslist.contains('menu')) || targetClasslist.contains('submenu')) {
@@ -145,6 +148,8 @@ function showForm(e) {
     addFormContainer.querySelector('.form-date').setAttribute('value', `${format(new Date(), 'yyyy-MM-dd')}`)
     addFormContainer.querySelector('.form-date').setAttribute('min', `${format(new Date(), 'yyyy-MM-dd')}`)
     checkSideMenu();
+    addBtn.style.display = 'none'
+    arrow.style.display = 'none'
 }
 
 function checkSideMenu() {
@@ -240,6 +245,8 @@ function showEditForm() {
     let t = tasks.find(item => item.edit == true)
     checkSideMenu()
     // addFormContainer.querySelector.
+    addBtn.style.display = 'none'
+    arrow.style.display = 'none'
     editFormContainer.querySelector('#etitle').value = t.title
     editFormContainer.querySelector('#epriority').value = t.priority
     editFormContainer.querySelector('#ecategory').value = t.category
@@ -290,6 +297,8 @@ function getTask(e) {
         let t = new Task(task.title, task.priority, task.description, task.category, task.date)
         arrow.style.pointerEvents = 'all';
         resetForm(form)
+        addBtn.style.display = 'block'
+        arrow.style.display = 'flex'
         return t
     } else {
         info[0].value = task.title == undefined ? '': task.title; 

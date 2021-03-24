@@ -55,6 +55,7 @@
             .add{
                 width: 50px;
                 height: 50px;
+                display: block;
                 position: relative;
                 .wave {
                     width: 50px;
@@ -132,11 +133,38 @@ body {
                 position: fixed;
                 top: 10px;
                 right: 10px;
-                z-index: 1000;
+                z-index: 11;
             }
         }
+
         .content {
-            min-height: 100vh - 185px;
+            &__side {
+                .arrow {
+                    bottom: 90%;
+                }
+            }
+            &__tasks {
+                .form-container {
+                    height: 150%;
+                    padding-top: 0;
+                    .form {
+                        margin: 0 auto;
+                        width: 90%;
+                    }
+                    .cancel {
+                        width: 25px;
+                        height: 25px;
+                        top: 0;
+                        right: 0;
+                        font-size: 1rem;
+                    }
+                }
+                .tables-container {
+                    overflow: visible;
+                }
+            }
+            min-height: 80vh;
+            overflow: visible;
         }
     }
 }
@@ -180,7 +208,15 @@ body {
             flex: auto;
             &__side {
                 .arrow {
-                    bottom: 90%;
+                    bottom: 95%;
+                }
+                .form-container {
+                    .form {
+                        width: 98%;
+                        // input[type=submit], input[type=text], textarea, label {
+                        //     display: block;
+                        // }
+                    }
                 }
             }
         }

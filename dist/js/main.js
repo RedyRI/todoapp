@@ -1177,6 +1177,39 @@ function getUTCDayOfYear(dirtyDate) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getUTCISOWeek)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _startOfUTCISOWeek_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../startOfUTCISOWeek/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js");
+/* harmony import */ var _startOfUTCISOWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../startOfUTCISOWeekYear/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js");
+/* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
+
+
+
+var MILLISECONDS_IN_WEEK = 604800000; // This function will be a part of public API when UTC function will be implemented.
+// See issue: https://github.com/date-fns/date-fns/issues/376
+
+function getUTCISOWeek(dirtyDate) {
+  (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
+  var diff = (0,_startOfUTCISOWeek_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(date).getTime() - (0,_startOfUTCISOWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(date).getTime(); // Round the number of days to the nearest integer
+  // because the number of milliseconds in a week is not constant
+  // (e.g. it's different in the week of the daylight saving time clock shift)
+
+  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
+}
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/esm/_lib/getUTCISOWeekYear/index.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/date-fns/esm/_lib/getUTCISOWeekYear/index.js ***!
@@ -1219,19 +1252,19 @@ function getUTCISOWeekYear(dirtyDate) {
 
 /***/ }),
 
-/***/ "./node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/date-fns/esm/_lib/getUTCISOWeek/index.js ***!
-  \***************************************************************/
+/***/ "./node_modules/date-fns/esm/_lib/getUTCWeek/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/date-fns/esm/_lib/getUTCWeek/index.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getUTCISOWeek)
+/* harmony export */   "default": () => (/* binding */ getUTCWeek)
 /* harmony export */ });
 /* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
-/* harmony import */ var _startOfUTCISOWeek_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../startOfUTCISOWeek/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js");
-/* harmony import */ var _startOfUTCISOWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../startOfUTCISOWeekYear/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js");
+/* harmony import */ var _startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../startOfUTCWeek/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js");
+/* harmony import */ var _startOfUTCWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../startOfUTCWeekYear/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCWeekYear/index.js");
 /* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
 
 
@@ -1240,10 +1273,10 @@ __webpack_require__.r(__webpack_exports__);
 var MILLISECONDS_IN_WEEK = 604800000; // This function will be a part of public API when UTC function will be implemented.
 // See issue: https://github.com/date-fns/date-fns/issues/376
 
-function getUTCISOWeek(dirtyDate) {
+function getUTCWeek(dirtyDate, options) {
   (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
   var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
-  var diff = (0,_startOfUTCISOWeek_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(date).getTime() - (0,_startOfUTCISOWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(date).getTime(); // Round the number of days to the nearest integer
+  var diff = (0,_startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(date, options).getTime() - (0,_startOfUTCWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(date, options).getTime(); // Round the number of days to the nearest integer
   // because the number of milliseconds in a week is not constant
   // (e.g. it's different in the week of the daylight saving time clock shift)
 
@@ -1306,39 +1339,6 @@ function getUTCWeekYear(dirtyDate, dirtyOptions) {
 
 /***/ }),
 
-/***/ "./node_modules/date-fns/esm/_lib/getUTCWeek/index.js":
-/*!************************************************************!*\
-  !*** ./node_modules/date-fns/esm/_lib/getUTCWeek/index.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getUTCWeek)
-/* harmony export */ });
-/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
-/* harmony import */ var _startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../startOfUTCWeek/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js");
-/* harmony import */ var _startOfUTCWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../startOfUTCWeekYear/index.js */ "./node_modules/date-fns/esm/_lib/startOfUTCWeekYear/index.js");
-/* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
-
-
-
-
-var MILLISECONDS_IN_WEEK = 604800000; // This function will be a part of public API when UTC function will be implemented.
-// See issue: https://github.com/date-fns/date-fns/issues/376
-
-function getUTCWeek(dirtyDate, options) {
-  (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
-  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
-  var diff = (0,_startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(date, options).getTime() - (0,_startOfUTCWeekYear_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(date, options).getTime(); // Round the number of days to the nearest integer
-  // because the number of milliseconds in a week is not constant
-  // (e.g. it's different in the week of the daylight saving time clock shift)
-
-  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
-}
-
-/***/ }),
-
 /***/ "./node_modules/date-fns/esm/_lib/protectedTokens/index.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/date-fns/esm/_lib/protectedTokens/index.js ***!
@@ -1391,6 +1391,35 @@ function requiredArgs(required, args) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ startOfUTCISOWeek)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
+ // This function will be a part of public API when UTC function will be implemented.
+// See issue: https://github.com/date-fns/date-fns/issues/376
+
+function startOfUTCISOWeek(dirtyDate) {
+  (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
+  var weekStartsOn = 1;
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
+  var day = date.getUTCDay();
+  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+  date.setUTCDate(date.getUTCDate() - diff);
+  date.setUTCHours(0, 0, 0, 0);
+  return date;
+}
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/date-fns/esm/_lib/startOfUTCISOWeekYear/index.js ***!
@@ -1421,26 +1450,37 @@ function startOfUTCISOWeekYear(dirtyDate) {
 
 /***/ }),
 
-/***/ "./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/date-fns/esm/_lib/startOfUTCISOWeek/index.js ***!
-  \*******************************************************************/
+/***/ "./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js ***!
+  \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ startOfUTCISOWeek)
+/* harmony export */   "default": () => (/* binding */ startOfUTCWeek)
 /* harmony export */ });
-/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toInteger/index.js */ "./node_modules/date-fns/esm/_lib/toInteger/index.js");
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
 /* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
 
  // This function will be a part of public API when UTC function will be implemented.
 // See issue: https://github.com/date-fns/date-fns/issues/376
 
-function startOfUTCISOWeek(dirtyDate) {
+function startOfUTCWeek(dirtyDate, dirtyOptions) {
   (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
-  var weekStartsOn = 1;
-  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(dirtyDate);
+  var options = dirtyOptions || {};
+  var locale = options.locale;
+  var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
+  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : (0,_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : (0,_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+
+  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
+  }
+
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(dirtyDate);
   var day = date.getUTCDay();
   var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
   date.setUTCDate(date.getUTCDate() - diff);
@@ -1482,46 +1522,6 @@ function startOfUTCWeekYear(dirtyDate, dirtyOptions) {
   firstWeek.setUTCFullYear(year, 0, firstWeekContainsDate);
   firstWeek.setUTCHours(0, 0, 0, 0);
   var date = (0,_startOfUTCWeek_index_js__WEBPACK_IMPORTED_MODULE_3__.default)(firstWeek, dirtyOptions);
-  return date;
-}
-
-/***/ }),
-
-/***/ "./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/date-fns/esm/_lib/startOfUTCWeek/index.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ startOfUTCWeek)
-/* harmony export */ });
-/* harmony import */ var _toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toInteger/index.js */ "./node_modules/date-fns/esm/_lib/toInteger/index.js");
-/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
-/* harmony import */ var _requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
-
-
- // This function will be a part of public API when UTC function will be implemented.
-// See issue: https://github.com/date-fns/date-fns/issues/376
-
-function startOfUTCWeek(dirtyDate, dirtyOptions) {
-  (0,_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
-  var options = dirtyOptions || {};
-  var locale = options.locale;
-  var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
-  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : (0,_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(localeWeekStartsOn);
-  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : (0,_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
-
-  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
-    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
-  }
-
-  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_2__.default)(dirtyDate);
-  var day = date.getUTCDay();
-  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-  date.setUTCDate(date.getUTCDate() - diff);
-  date.setUTCHours(0, 0, 0, 0);
   return date;
 }
 
@@ -2987,7 +2987,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "filter": () => (/* binding */ filter),
 /* harmony export */   "addFilterLabel": () => (/* binding */ addFilterLabel),
 /* harmony export */   "removeFilterLabel": () => (/* binding */ removeFilterLabel),
-/* harmony export */   "updateCount": () => (/* binding */ updateCount)
+/* harmony export */   "updateCount": () => (/* binding */ updateCount),
+/* harmony export */   "getOption": () => (/* binding */ getOption)
 /* harmony export */ });
 let filterValues = [];
 
@@ -2998,6 +2999,7 @@ function filter(value, cards, tasks) {
   if(filterValues.indexOf(value) == -1) {
     if(value== 'ascendant' || value == 'descendant') {
       if(value == 'ascendant') {
+        console.log(tasks);
         console.log('value is ascendant');
         orderedTasks = tasks.sort((a,b) => a.date > b.date ? 1: -1);
       } else {
@@ -3005,39 +3007,41 @@ function filter(value, cards, tasks) {
         orderedTasks = tasks.sort((a,b) => a.date > b.date ? -1: 1);
       }
       let i = 1;
+      console.log(tasks);
       orderedTasks.forEach(task => {
-         cards.find(card => card.getAttribute('data-id') == task.id).style.order = `${i}`;
-         i++;
+        let idToOrder = cards.find(card => card.getAttribute('data-id') == task.id);
+        if(idToOrder) {
+          idToOrder.style.order = `${i}`;
+          i++;
+        }
        });
       console.log(orderedTasks);
-      filterValues.push(value )
+      filterValues.push('ascendant')
+      filterValues.push('descendant')
       filteredCards = cards;
     } else {
 
       filterValues.push(value)
-      let option;
-      let val = value;
+      let option = getOption(value)
       
-      if(val == 'home' || val == 'shopping' || val == 'school' || val == 'work') {
-        option = 'category'
-      } else if (val == 'not important' || val == 'important' || val == 'urgent') {
-        option = 'priority'
-      } else if(val == 'pending' || val == 'done'){
-        option = 'done'
-      } else {
-        option = 'date'
-      }
+      // if(val == 'home' || val == 'shopping' || val == 'school' || val == 'work') {
+      //   option = 'category'
+      // } else if (val == 'not important' || val == 'important' || val == 'urgent') {
+      //   option = 'priority'
+      // } else if(val == 'pending' || val == 'done'){
+      //   option = 'done'
+      // } else {
+      //   option = 'date'
+      // }
       
       filteredCards = cards.filter(card => {
         let cardOption = card.querySelector(`.${option}`);
-        console.log(cardOption);
-        console.log(cardOption.textContent);
-        if(cardOption.textContent != val) {
+        if(cardOption.textContent != value) {
           card.style.display = 'none'
         } else {
           card.style.display = 'flex'
         }
-        return cardOption.textContent == val
+        return cardOption.textContent == value
       })
       console.log(filteredCards);
     }
@@ -3046,6 +3050,7 @@ function filter(value, cards, tasks) {
 }
 
 function addFilterLabel(cont,ref, value) {
+  console.log(filterValues);
   if(filterValues.indexOf(value) == -1) {
     let optionContainer = document.createElement('div');
     optionContainer.textContent = value;
@@ -3077,6 +3082,21 @@ function removeFilterLabel(cont) {
 function updateCount(cont, value) {
   cont.querySelector('.count').textContent = `(${value})`;
 }
+
+function getOption(val) {
+  let option;
+  if(val == 'home' || val == 'shopping' || val == 'school' || val == 'work') {
+    option = 'category'
+  } else if (val == 'not important' || val == 'important' || val == 'urgent') {
+    option = 'priority'
+  } else if(val == 'pending' || val == 'done'){
+    option = 'done'
+  } else {
+    option = 'date'
+  }
+  return option;
+}
+
 
 
 
@@ -3471,6 +3491,7 @@ const cancelForm = addFormContainer.querySelector('.cancel')
 const cancelEditForm = editFormContainer.querySelector('.cancel')
 const submenuItems = [...document.querySelectorAll('.submenu-item')]
 const resetFiltertn = menuContainer.querySelector('.reset-filter')
+const headerMenuItems = [...header.querySelectorAll('.header-menu-item')]
 
 tasks.push(t1)
 tasks.push(t2)
@@ -3495,6 +3516,7 @@ saveChangsBtn.addEventListener('click', edit)
 mode.addEventListener('change', checkMode)
 submenuItems.forEach(item => { item.addEventListener('click', startFilter) })
 resetFiltertn.addEventListener('click', resetFilter)
+headerMenuItems.forEach(item => item.addEventListener('change', getValue))
 
 // render the initial content
 tasksContainer.appendChild(addFormContainer)
@@ -3502,17 +3524,28 @@ tasksContainer.appendChild(editFormContainer)
 tasksContainer.appendChild(cardsContainer)
 
 // functions 
+function getValue(e) {
+    let value = e.target.value;
+    if(value != '-') {
+        startFilter(value)
+    }
+}
+
 function resetFilter(e) {
     let cards = [...cardsContainer.querySelectorAll('.card')]
-    cards.forEach(card => {
-        card.style.display = 'flex'
-    })
+    cards.forEach(card => card.style.display = 'flex')
     filteredCards = ['start'];
-    (0,_filter__WEBPACK_IMPORTED_MODULE_6__.removeFilterLabel)(tasksContainer);
+    headerMenuItems.forEach(item => item.value = '-')
+    ;(0,_filter__WEBPACK_IMPORTED_MODULE_6__.removeFilterLabel)(tasksContainer);
 }
 function startFilter(e) {
-    console.log(typeof(e) == 'string');
-    let value = e.target.textContent;
+    let value = typeof(e) == 'string' ? e : e.target.textContent;
+    if(typeof(e) != 'string') {
+        let opt = (0,_filter__WEBPACK_IMPORTED_MODULE_6__.getOption)(value);
+        headerMenuItems.find(item => item.name == opt).value = value
+    }
+
+    // let value = e.target.textContent;
     (0,_filter__WEBPACK_IMPORTED_MODULE_6__.addFilterLabel)(tasksContainer, cardsContainer, value)
     if(filteredCards.indexOf('start') == 0) {
         filteredCards = [...cardsContainer.querySelectorAll('.card')];
@@ -3585,11 +3618,6 @@ function addTask(e) {
     }
 }
 
-// function render(task) {
-//     let renderMode = mode.value == 1 ? renderAsCards : renderAsTable;
-//     renderMode(task)
-// }
-
 function renderAsCards(task) {
     let card = (0,_makeCard__WEBPACK_IMPORTED_MODULE_4__.createCard)();
     (0,_makeCard__WEBPACK_IMPORTED_MODULE_4__.fillCard)(card, task, 'new')
@@ -3609,7 +3637,19 @@ function deleteOrUpdateCard(e) {
         showEditForm();
     } else if (e.target.classList.contains('expand-btn')) {
         console.log('asd');
-        console.log(e.target.previousSibling.previousSibling);
+        let description = e.target.previousSibling.previousSibling.firstElementChild;
+        let height = description.scrollHeight; 
+        if(description.classList.contains('dropdown')) {
+            description.classList.toggle('dropdown')
+            description.removeAttribute('style')
+            e.target.removeAttribute('style')
+        }else {
+            description.classList.toggle('dropdown')
+            description.style.height = `${height}px`
+            description.style.margin = `5px 7px`
+            e.target.style.transform = 'rotate(180deg)'
+        }
+        console.log(e.target.previousSibling.previousSibling.firstElementChild);
     }
 }
 
